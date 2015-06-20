@@ -1,4 +1,5 @@
 // Vendor
+var crypto = require('crypto');
 var bodyParser = require('body-parser');
 var dyalnaIdentity = require('node-dyalna-identity');
 var requestJson = require('request-json');
@@ -24,10 +25,14 @@ var IdentityAdminClient = require('./helper/identity-admin-client');
 var identityAdminClient = new IdentityAdminClient(Q, requestJson, config.identity.host, config.identity.token,
   config.identity.adminUsername, config.identity.adminPassword);
 
+// Repositories
+var ProjectRepository = require('./repository/project-repository');
+var projectRepository = new ProjectRepository(_, crypto, db, identityAdminClient);
+
 // Controllers
 var ProjectController = require('./controller/project-controller');
 var controllers = {
-  projectController: new ProjectController(_, db, identityAdminClient)
+  projectController: new ProjectController(_, db, projectRepository)
 };
 
 module.exports = {

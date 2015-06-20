@@ -1,6 +1,7 @@
 import {DyalnaIdentityModule} from '../../../bower_components/angular-dyalna-identity/src/js/module';
 import {Router} from './config/router';
 import {AuthenticationConfig} from './config/authentication';
+import {GravatarConfig} from './config/gravatar';
 import {ListController} from './controller/list-controller';
 import {UserConfirmController} from './controller/user-confirm-controller';
 import {UserMenuDirective} from './directive/user-menu';
@@ -15,10 +16,12 @@ angular
     'ui.router',
     'mgcrea.ngStrap',
     'hc.marked',
+    'ui.gravatar',
     DyalnaIdentityModule
   ])
   .config(Router)
   .config(AuthenticationConfig)
+  .config(GravatarConfig)
   .controller('ListController', ListController)
   .controller('UserConfirmController', UserConfirmController)
   .directive('userMenu', UserMenuDirective)

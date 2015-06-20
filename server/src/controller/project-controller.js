@@ -1,25 +1,11 @@
-module.exports = function(_, db, identityAdminClient) {
+module.exports = function(_, db, projectRepository) {
 
   return {
     findAllAction: function(req, res) {
-      return db.Project.findAll({ where: req.query }).then(function(projects) {
-        var authors = projects.map(function(project) {
-          return project.author;
-        });
-        var url = 'user?' + authors.map(function(author) {
-            return 'usernames[]=' + author;
-          }).join('&');
-
-        return identityAdminClient.get(url).then(function(users) {
-          return res.send({ status: 'success', data: projects.map(function(project) {
-              project.author = _.find(users, { username: project.author });
-
-              return project;
-            })
-          });
-        });
+      return projectRepository.findAll(req.query).then(function(projects) {
+        return res.send({ status: 'success', data: projects });
       }).catch(function() {
-        return res.status(500).send({ status: 'error', message: 'error' });
+        return res.status(500).send({ status: 'error', message: 'error fetching projects' });
       });
     },
 
@@ -27,7 +13,7 @@ module.exports = function(_, db, identityAdminClient) {
       return db.Project.find(req.params.id).then(function(project) {
         return res.send({ status: 'success', data: project});
       }, function() {
-        return res.status(500).send({ status: 'error', message: 'database error' });
+        return res.status(500).send({ status: 'error', message: 'error fetching project' });
       });
     },
 
