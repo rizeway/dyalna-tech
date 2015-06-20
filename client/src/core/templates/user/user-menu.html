@@ -1,0 +1,6 @@
+<a ng-show="!ctrl.loggedin" class="pointer" data-ng-click="ctrl.login()">Connexion</a>
+<div ng-show="ctrl.loggedin" class="dropdown">
+  <a class="pointer inline-block dropdown-toggle"
+     data-template="core/user/user-loggedin-menu.html" data-animation="am-flip-x"
+     data-auto-close="1" data-placement="bottom-right" bs-popover>{{ ctrl.user.username }}</a>
+</div>

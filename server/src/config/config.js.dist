@@ -1,0 +1,20 @@
+module.exports = {
+  port: 8800,
+
+  identity: {
+    host: process.env.IDENTITY_HOST,
+    token: process.env.IDENTITY_TOKEN,
+    adminUsername: process.env.IDENTITY_ADMIN_USERNAME,
+    adminPassword: process.env.IDENTITY_ADMIN_PASSWORD
+  },
+
+  database: {
+    production: {
+      username: process.env.MYSQL_USERNAME,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
+      host: process.env.MYSQL_HOST,
+      dialect: 'mysql'
+    }
+  }
+};

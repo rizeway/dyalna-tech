@@ -1,0 +1,22 @@
+<form class="login-form" ng-show="ctrl.ready" ng-submit="ctrl.submit()">
+  <div class="modal-body">
+    <div class="alert alert-error" ng-show="ctrl.error">
+        Vérifiez votre nom d'utilisateur ou mot de passe
+        <button class="close" ng-click="ctrl.error = false">&times;</button>
+    </div>
+    <div class="input-icon">
+        <div class="add-on"><i class="fa fa-user"></i></div>
+        <div class="input-container"><input type="text" placeholder="Nom d'utilisateur" data-ng-model="ctrl.username" /></div>
+    </div>
+    <div class="input-icon">
+        <div class="add-on"><i class="fa fa-lock"></i></div>
+        <div class="input-container"><input type="password" placeholder="Mot de passe" data-ng-model="ctrl.password" /></div>
+    </div>
+
+    <p>Vous n'avez pas encore de compte, <a ui-sref="app.register">Inscrivez vous</a>, ça prend 30 secondes.</p>
+  </div>
+
+  <div class="modal-footer">
+      <input class="btn btn-one" type="submit" value="Login" />
+  </div>
+</form>

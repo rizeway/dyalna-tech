@@ -1,0 +1,4 @@
+module.exports = {
+    identity: 'http://dyalnaidentity:4000',
+    tech:     'http://dyalnatech:8800'
+};

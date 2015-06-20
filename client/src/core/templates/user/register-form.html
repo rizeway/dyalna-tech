@@ -1,0 +1,50 @@
+<div ng-if="ctrl.error" class="alert alert-danger">
+    Une erreur est survenue lors de l'inscription, vérifier vos informations
+</div>
+
+<div ng-if="ctrl.success" class="alert alert-success">
+    Votre inscription a été effectuée avec succès, vous allez recevoir un email avec les instructions pour activer votre compte. Merci.
+</div>
+
+<div>
+    <form ng-show="!ctrl.success" ng-submit="ctrl.register()">
+
+        <div class="input-icon">
+            <div class="add-on"><i class="fa fa-user"></i></div>
+            <div class="input-container">
+                <input type="text" placeholder="Nom d'utilisateur" data-ng-model="ctrl.user.username" />
+            </div>
+        </div>
+
+        <div class="input-icon">
+            <div class="add-on"><i class="fa fa-lock"></i></div>
+            <div class="input-container">
+                <input type="password" placeholder="Mot de passe" data-ng-model="ctrl.user.password" />
+            </div>
+        </div>
+
+        <div class="input-icon">
+            <div class="add-on"><i class="fa fa-lock"></i></div>
+            <div class="input-container">
+                <input type="password" placeholder="Répeter le mot de passe" data-ng-model="ctrl.passwordCheck" />
+            </div>
+        </div>
+
+        <div class="input-icon">
+            <div class="add-on"><i class="fa fa-envelope"></i></div>
+            <div class="input-container">
+                <input type="email" placeholder="Email" data-ng-model="ctrl.user.email" />
+            </div>
+        </div>
+
+        <p class="text-muted text-small">En validant le formulaire, vous acceptez les <a href="javascript:;">conditions d'utilisation</a>.</p>
+
+        <div class="divider"></div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" ng-class="{disabled: ctrl.loading}">
+            Inscription
+            <i ng-if="ctrl.loading" class="fa fa-spinner spin"></i>
+        </button>
+
+    </form>
+</div>

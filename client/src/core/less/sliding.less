@@ -1,0 +1,49 @@
+.sliding-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  right: 0;
+  z-index: 20;
+  background: #FFFFFF;
+  border-left: 1px solid #CCCCCC;
+
+  .sliding-content {
+    padding: 10px 20px;
+    overflow: auto;
+    position: absolute;
+    top: 66px;
+    bottom: 0;
+    width: 100%;
+    .box-sizing(border-box);
+  }
+
+  .sliding-header {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 66px;
+    padding: 16px 20px;
+    background: #EEEEEE;
+    border-bottom: 1px solid #CCCCCC;
+    color: #666666;
+    .box-sizing(border-box);
+    h2 {
+      font-weight: 300;
+      font-size: 18px;
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.sliding-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  background: rgba(220, 220, 220, 0.5);
+}

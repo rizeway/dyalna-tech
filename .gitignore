@@ -1,0 +1,20 @@
+.DS_Store
+
+# Client
+client/public
+client/node_modules
+client/bower_components
+client/.bower
+client/config/config.js
+
+# Server
+server/node_modules
+server/src/config/config.js
+server/src/config/migration.json
+
+# Other
+docker-compose.yml
+
+# IDE
+.idea
+nbproject

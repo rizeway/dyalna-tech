@@ -1,0 +1,16 @@
+{
+  "name": "dyalna-tech-server",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "dependencies": {
+    "body-parser": "~1.12.0",
+    "db-migrate": "~0.9.10",
+    "express": "~4.12.2",
+    "lodash": "^3.7.0",
+    "mysql": "~2.5.5",
+    "node-dyalna-identity": "^1.0.0",
+    "q": "^1.4.1",
+    "request-json": "^0.5.2",
+    "sequelize": "~2.0.4"
+  }
+}

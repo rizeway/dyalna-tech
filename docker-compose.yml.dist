@@ -1,0 +1,52 @@
+dyalnatechfront:
+    build: ./client
+    volumes:
+        - ./client:/code
+    ports:
+        - '8000:8000'
+    links:
+        - dyalnatech
+        - dyalnaidentity
+
+dyalnaidentity:
+    image: rizeway/dyalna-identity
+    links:
+        - mysqlidentity
+    environment:
+        IDENTITY_TOKEN: 'x-dyalna-identity-token'
+        IDENTITY_GMAIL_USERNAME: 'myemail'
+        IDENTITY_GMAIL_PASSWORD: 'mypassword'
+        IDENTITY_ACTIVATION_LINK: 'http://boot2docker:8000/#/confirm?token='
+        MYSQL_HOST: 'mysqlidentity'
+        MYSQL_USERNAME: 'root'
+        MYSQL_PASSWORD: 'mypassword'
+        MYSQL_DATABASE: 'identity'
+
+dyalnatech:
+    build: ./server
+    volumes:
+        - ./server:/code
+    links:
+        - mysqltech
+        - dyalnaidentity
+    environment:
+        IDENTITY_HOST: 'http://dyalnaidentity:4000'
+        IDENTITY_TOKEN: 'x-dyalna-identity-token'
+        IDENTITY_ADMIN_USERNAME: 'admin'
+        IDENTITY_ADMIN_PASSWORD: 'admin'
+        MYSQL_HOST: 'mysqltech'
+        MYSQL_USERNAME: 'root'
+        MYSQL_PASSWORD: 'mypassword'
+        MYSQL_DATABASE: 'tech'
+
+mysqlidentity:
+    image: mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: 'mypassword'
+        MYSQL_DATABASE: 'identity'
+
+mysqltech:
+    image: mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: 'mypassword'
+        MYSQL_DATABASE: 'tech'
