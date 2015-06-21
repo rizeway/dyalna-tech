@@ -1,7 +1,8 @@
 export class ProjectController {
   /* @ngInject */
-  constructor(project) {
+  constructor($state, project) {
     this.project = project;
+    this.absoluteUrl = $state.href('app.project', { id: project.id }, {absolute: true});
   }
 }
 

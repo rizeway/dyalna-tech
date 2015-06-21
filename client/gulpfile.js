@@ -31,7 +31,8 @@ var PATH = {
     './bower_components/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
     './bower_components/marked/lib/marked.js',
     './bower_components/angular-marked/angular-marked.js',
-    './bower_components/angular-gravatar/build/angular-gravatar.js'
+    './bower_components/angular-gravatar/build/angular-gravatar.js',
+    './bower_components/angular-easyfb/angular-easyfb.js'
   ],
   VENDORS_CSS: [
     './bower_components/angular-motion/dist/angular-motion.css',

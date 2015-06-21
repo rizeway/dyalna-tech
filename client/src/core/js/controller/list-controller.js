@@ -1,32 +1,36 @@
 export class ListController {
   /* @ngInject */
   constructor($scope, $state, DyalnaIdentity, ProjectRepository, projects) {
-        this.loggedin = DyalnaIdentity.isLoggedIn();
-        this.user = DyalnaIdentity.user;
-        this.projects = projects;
-        this.project = {};
-        this.createError = false;
-        this.$state = $state;
-        this.ProjectRepository = ProjectRepository;
+    this.loggedin = DyalnaIdentity.isLoggedIn();
+    this.user = DyalnaIdentity.user;
+    this.projects = projects;
+    this.project = {};
+    this.createError = false;
+    this.$state = $state;
+    this.ProjectRepository = ProjectRepository;
 
-        $scope.$on('DyalnaIdentity.login', () => {
-          this.loggedin = true;
-          this.user = DyalnaIdentity.user;
-        });
+    $scope.$on('DyalnaIdentity.login', () => {
+      this.loggedin = true;
+      this.user = DyalnaIdentity.user;
+    });
 
-        $scope.$on('DyalnaIdentity.logout', () => {
-          this.loggedin = false;
-          this.user = null;
-        });
-    }
+    $scope.$on('DyalnaIdentity.logout', () => {
+      this.loggedin = false;
+      this.user = null;
+    });
+  }
 
-    create() {
-      this.ProjectRepository.create(this.project).then(() => {
-        this.$state.reload();
-      }, () => {
-        this.createError = true;
-      });
-    }
+  create() {
+    this.ProjectRepository.create(this.project).then(() => {
+      this.$state.reload();
+    }, () => {
+      this.createError = true;
+    });
+  }
+
+  getUrl(project) {
+    return this.$state.href('app.project', { id: project.id }, {absolute: true});
+  }
 }
 
 ListController.resolve = {

@@ -9,6 +9,9 @@
                         <div class="date">{{ project.createdAt|date }}</div>
                         <div class="date">{{ project.createdAt|date:'shortTime' }}</div>
                     </div>
+                    <a ui-sref="app.project({ id: project.id })" class="project-comments-count">
+                        <div class="fb-comments-count" data-href="{{ ctrl.getUrl(project) }}"></div>
+                    </a>
                     <img class="project-author" gravatar-src="project.author.hash" gravatar-size="40">
 
                     <h2><a ui-sref="app.project({ id: project.id })" class="project-name">{{ project.name }}</a></h2>

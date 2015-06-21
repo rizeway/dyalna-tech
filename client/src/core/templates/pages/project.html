@@ -2,18 +2,20 @@
     <div class="content">
         <div class="contenu">
             <div class="project single">
-                <h1><a ng-href="{{ ctrl.project.url }}" class="project-name">{{ ctrl.project.name }}</a></h1>
                 <div class="project-date">
                     <div class="date">{{ ctrl.project.createdAt|date }}</div>
                     <div class="date">{{ ctrl.project.createdAt|date:'shortTime' }}</div>
                 </div>
                 <img class="project-author" gravatar-src="ctrl.project.author.hash" gravatar-size="40">
 
-                <div class="project-description">{{ ctrl.project.shortDescription }}</div>
+                <h1><a ng-href="{{ ctrl.project.url }}" class="project-name">{{ ctrl.project.name }}</a></h1>
 
-                <div class="project-long-description" marked="ctrl.project.description"></div>
+                <div class="project-description">{{ ctrl.project.shortDescription }}</div>
+                <div class="clear"></div>
+                <div class="separator-top project-long-description" marked="ctrl.project.description"></div>
             </div>
-        </div>
+
+            <div class="fb-comments" data-width="668" data-href="{{ ctrl.absoluteUrl }}" data-colorscheme="light"></div>
         </div>
 
         <div class="sidebar">

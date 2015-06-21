@@ -1,8 +1,8 @@
 import {ListController} from '../controller/list-controller';
 import {ProjectController} from '../controller/project-controller';
 
-/* @ngInject */
-export function Router($stateProvider, $urlRouterProvider) {
+export /* @ngInject */ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
+  $locationProvider.hashPrefix('!');
   $urlRouterProvider.otherwise('/');
   $stateProvider
     .state('app', {

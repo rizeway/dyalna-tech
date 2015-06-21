@@ -1,5 +1,4 @@
-/* @ngInject */
-export function AuthenticationConfig(DyalnaIdentityConfigProvider) {
+export /* @ngInject */ function AuthenticationConfig(DyalnaIdentityConfigProvider) {
   DyalnaIdentityConfigProvider.setConfig({
     host: '/identity',
     loginUrl: '/login',
