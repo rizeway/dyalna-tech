@@ -3,6 +3,7 @@ import {Router} from './config/router';
 import {AuthenticationConfig} from './config/authentication';
 import {GravatarConfig} from './config/gravatar';
 import {ListController} from './controller/list-controller';
+import {ProjectController} from './controller/project-controller';
 import {UserConfirmController} from './controller/user-confirm-controller';
 import {UserMenuDirective} from './directive/user-menu';
 import {MarkdownEditorDirective} from './directive/markdown-editor';
@@ -23,6 +24,7 @@ angular
   .config(AuthenticationConfig)
   .config(GravatarConfig)
   .controller('ListController', ListController)
+  .controller('ProjectController', ProjectController)
   .controller('UserConfirmController', UserConfirmController)
   .directive('userMenu', UserMenuDirective)
   .directive('markdownEditor', MarkdownEditorDirective)

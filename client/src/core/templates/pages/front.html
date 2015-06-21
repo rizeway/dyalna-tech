@@ -11,7 +11,7 @@
                     </div>
                     <img class="project-author" gravatar-src="project.author.hash" gravatar-size="40">
 
-                    <h2><a ng-href="{{ project.url }}" class="project-name">{{ project.name }}</a></h2>
+                    <h2><a ui-sref="app.project({ id: project.id })" class="project-name">{{ project.name }}</a></h2>
                     <div class="project-description">{{ project.shortDescription }}</div>
                 </div>
             </div>

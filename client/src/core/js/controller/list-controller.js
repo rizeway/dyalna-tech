@@ -1,6 +1,6 @@
-/* @ngInject */
 export class ListController {
-    constructor($scope, $state, DyalnaIdentity, ProjectRepository, projects) {
+  /* @ngInject */
+  constructor($scope, $state, DyalnaIdentity, ProjectRepository, projects) {
         this.loggedin = DyalnaIdentity.isLoggedIn();
         this.user = DyalnaIdentity.user;
         this.projects = projects;
@@ -30,6 +30,5 @@ export class ListController {
 }
 
 ListController.resolve = {
-  /* @ngInject */
-  projects: ProjectRepository => ProjectRepository.findAll()
+  projects: /* @ngInject */ ProjectRepository => ProjectRepository.findAll()
 };
