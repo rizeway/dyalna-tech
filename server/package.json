@@ -11,6 +11,6 @@
     "node-dyalna-identity": "^1.0.0",
     "q": "^1.4.1",
     "request-json": "^0.5.2",
-    "sequelize": "~2.0.4"
+    "sequelize": "~3.0.0"
   }
 }

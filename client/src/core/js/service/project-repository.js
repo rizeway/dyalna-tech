@@ -16,4 +16,9 @@ export class ProjectRepository {
   create(project) {
     return this.$http.post(API_URL, project).then(response => response.data.data);
   }
+
+  star(project) {
+    return this.$http.post(API_URL + '/' + project.id + '/star')
+      .then(response => response.data.data);
+  }
 }

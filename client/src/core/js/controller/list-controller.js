@@ -1,6 +1,6 @@
 export class ListController {
   /* @ngInject */
-  constructor($scope, $state, DyalnaIdentity, ProjectRepository, projects) {
+  constructor($scope, $state, DyalnaIdentity, ProjectRepository, StarRepository, projects) {
     this.loggedin = DyalnaIdentity.isLoggedIn();
     this.user = DyalnaIdentity.user;
     this.projects = projects;
@@ -8,15 +8,29 @@ export class ListController {
     this.createError = false;
     this.$state = $state;
     this.ProjectRepository = ProjectRepository;
+    this.StarRepository = StarRepository;
+    this.myStars = [];
 
     $scope.$on('DyalnaIdentity.login', () => {
       this.loggedin = true;
       this.user = DyalnaIdentity.user;
+      this.loadStars();
     });
 
     $scope.$on('DyalnaIdentity.logout', () => {
       this.loggedin = false;
       this.user = null;
+      this.myStars = [];
+    });
+
+    this.loadStars();
+  }
+
+  loadStars() {
+    this.StarRepository.findMyStars({
+      projects: this.projects.map(project => project.id)
+    }).then(stars => {
+      this.myStars = stars;
     });
   }
 
@@ -30,6 +44,17 @@ export class ListController {
 
   getUrl(project) {
     return this.$state.href('app.project', { id: project.id }, {absolute: true});
+  }
+
+  star(project) {
+    this.ProjectRepository.star(project).then(star => {
+      project.countStars++;
+      this.loadStars();
+    });
+  }
+
+  isStared(project) {
+    return this.myStars.filter(star => star.ProjectId === project.id).length !== 0;
   }
 }
 

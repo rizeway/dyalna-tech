@@ -9,6 +9,7 @@ import {UserConfirmController} from './controller/user-confirm-controller';
 import {UserMenuDirective} from './directive/user-menu';
 import {MarkdownEditorDirective} from './directive/markdown-editor';
 import {ProjectRepository} from './service/project-repository';
+import {StarRepository} from './service/star-repository';
 
 angular.module('dyalna-tech.templates', []);
 angular
@@ -32,4 +33,5 @@ angular
   .directive('userMenu', UserMenuDirective)
   .directive('markdownEditor', MarkdownEditorDirective)
   .service('ProjectRepository', ProjectRepository)
+  .service('StarRepository', StarRepository)
 ;

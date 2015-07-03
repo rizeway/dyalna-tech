@@ -1,10 +1,20 @@
 <div>
     <div class="content">
         <div class="contenu">
-            <h1>Découvrez les derniers projets web et mobile algériens</h1>
-
             <div class="page">
-                <div class="project" ng-repeat="project in ctrl.projects">
+                <div ng-repeat="project in ctrl.projects" class="project">
+                    <a ng-if="ctrl.loggedin && !ctrl.isStared(project)" class="project-stars" href="" ng-click="ctrl.star(project)">
+                        <i class="fa fa-heart icon"></i>
+                        <span>{{ project.countStars }}</span>
+                    </a>
+                    <a ng-if="ctrl.loggedin && ctrl.isStared(project)" class="project-stars stared" href="">
+                        <i class="fa fa-heart icon"></i>
+                        <span>{{ project.countStars }}</span>
+                    </a>
+                    <a ng-if="!ctrl.loggedin" class="project-stars" href="">
+                        <i class="fa fa-heart icon"></i>
+                        <span>{{ project.countStars }}</span>
+                    </a>
                     <div class="project-date">
                         <div class="date">{{ project.createdAt|date }}</div>
                         <div class="date">{{ project.createdAt|date:'shortTime' }}</div>

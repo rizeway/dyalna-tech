@@ -28,11 +28,15 @@ var identityAdminClient = new IdentityAdminClient(Q, requestJson, config.identit
 // Repositories
 var ProjectRepository = require('./repository/project-repository');
 var projectRepository = new ProjectRepository(_, crypto, db, identityAdminClient);
+var StarRepository = require('./repository/star-repository');
+var starRepository = new StarRepository(_, db);
 
 // Controllers
 var ProjectController = require('./controller/project-controller');
+var StarController = require('./controller/star-controller');
 var controllers = {
-  projectController: new ProjectController(_, db, projectRepository)
+  projectController: new ProjectController(projectRepository),
+  starController: new StarController(starRepository)
 };
 
 module.exports = {

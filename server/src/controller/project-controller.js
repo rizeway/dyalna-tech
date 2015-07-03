@@ -1,4 +1,4 @@
-module.exports = function(_, db, projectRepository) {
+module.exports = function(projectRepository) {
 
   return {
     findAllAction: function(req, res) {
@@ -10,7 +10,7 @@ module.exports = function(_, db, projectRepository) {
     },
 
     findOneAction: function(req, res) {
-      return db.Project.find(req.params.id).then(function(project) {
+      return projectRepository.find(req.params.id).then(function(project) {
         return res.send({ status: 'success', data: project});
       }, function() {
         return res.status(500).send({ status: 'error', message: 'error fetching project' });
@@ -18,7 +18,7 @@ module.exports = function(_, db, projectRepository) {
     },
 
     createAction: function(req, res) {
-      db.Project.create(_.extend({}, req.body, { author: req.security.user.username, approved: false })).then(function(project) {
+      projectRepository.create(req.body, req.security.user.username).then(function(project) {
         return res.send({ status: 'success', data: project});
       }, function() {
         return res.status(500).send({ status: 'error', message: 'database error' });

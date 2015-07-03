@@ -14,14 +14,18 @@ module.exports = function(_, crypto, db, identityAdminClient) {
     };
   }
 
-  function serializeProject(project, users) {
+  function loadAuthor(project, users) {
     var author = _.find(users, { username: project.author });
     project.author = author ? serializeAuthor(author) : null;
 
     return project;
   }
 
-  function serializeProjects(projects) {
+  function loadAuthors(projects) {
+    if (projects.length === 0) {
+      return projects;
+    }
+
     var authors = projects.map(function(project) {
       return project.author;
     });
@@ -31,14 +35,82 @@ module.exports = function(_, crypto, db, identityAdminClient) {
 
     return identityAdminClient.get(url).then(function(users) {
       return projects.map(function(project) {
-        return serializeProject(project, users);
+        return loadAuthor(project, users);
       });
     });
   }
 
+  function loadOneAuthor(project) {
+    var projects = loadAuthors([project]);
+
+    return projects[0];
+  }
+
+  function loadStars(projects) {
+    if (projects.length === 0) {
+      return projects;
+    }
+
+    return db.sequelize.query('SELECT ProjectId AS pid, count(Id) AS countStars FROM Stars WHERE ProjectId IN (:projects) GROUP BY ProjectId', {
+      replacements: {
+        projects: projects.map(function(project) { return project.id; })
+      },
+      type: db.sequelize.QueryTypes.SELECT
+    }).then(function(stars) {
+      return projects.map(function(project) {
+        var star = _.find(stars, { pid: project.id });
+        project.countStars = star ? star.countStars : 0;
+
+        return project;
+      });
+    });
+  }
+
+  function loadOneStars(project) {
+    var projects = loadStars([project]);
+
+    return projects[0];
+  }
+
+  function serializeOne(project) {
+    return {
+      id: project.id,
+      name: project.name,
+      shortDescription: project.shortDescription,
+      description: project.description,
+      url: project.url,
+      author: project.author,
+      approved: project.approved,
+      createdAt: project.createdAt,
+      updatedAt: project.updatedAt,
+      countStars: project.countStars
+    };
+  }
+
+  function serialize(projects) {
+    return projects.map(serializeOne);
+  }
+
   return {
     findAll: function(query) {
-      return db.Project.findAll({ where: query }).then(serializeProjects);
+      return db.Project.findAll({ where: query })
+        .then(loadStars)
+        .then(loadAuthors)
+        .then(serialize);
+    },
+
+    find: function(id) {
+      return db.Project.find(id)
+        .then(loadOneStars)
+        .then(loadOneAuthor)
+        .then(serializeOne);
+    },
+
+    create: function(projectData, author) {
+      return db.Project.create(_.extend({}, projectData, { author: author, approved: false }))
+        .then(loadOneStars)
+        .then(loadOneAuthor)
+        .then(serializeOne);
     }
   };
 };

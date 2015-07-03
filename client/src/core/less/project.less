@@ -2,9 +2,29 @@
 
   overflow: hidden;
   border-top: 1px dashed #ddd;
+  padding-bottom: 10px;
+  cursor: pointer;
 
   &.single {
     border: 0;
+  }
+
+  .project-stars {
+    float: left;
+    width: 60px;
+    margin-top: 25px;
+    text-align: center;
+    color: #d9d9d9;
+    &:hover {
+      color: @themeColorOne;
+    }
+    .icon {
+      display: block;
+    }
+
+    &.stared .icon {
+      color: @themeColorTwo;
+    }
   }
 
   .project-comments-count {
@@ -35,6 +55,7 @@
     float: right;
     width: 100px;
     padding-top: 20px;
+    padding-right: 10px;
 
     .date {
       color: #bbb;
@@ -66,7 +87,11 @@
   .project-description {
     line-height: 25px;
     float: left;
-    width: 450px;
+    width: 400px;
+  }
+
+  &:hover {
+    background: #f0f0f0;
   }
 }
 

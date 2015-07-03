@@ -9,10 +9,14 @@ app.get('/', function (req, res) {
   res.send('Dyalna Tech Server Running ...');
 });
 
-// Project
+// Project & Stars
 app.get('/project', container.controllers.projectController.findAllAction);
 app.get('/project/:id', container.controllers.projectController.findOneAction);
+app.post('/project/:id/star', container.controllers.starController.createAction);
 app.post('/project', container.middlewares.authentication, container.controllers.projectController.createAction);
+
+// Stars
+app.get('/star', container.controllers.starController.myStarsAction);
 
 app.listen(container.config.port);
 console.log('Dyalna Tech Server running on Port %s', container.config.port);
