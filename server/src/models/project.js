@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Project.hasMany(models.Star);
+        Project.hasMany(models.Maker);
       }
     }
   });

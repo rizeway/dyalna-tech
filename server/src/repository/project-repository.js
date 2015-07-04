@@ -1,4 +1,4 @@
-module.exports = function(_, crypto, Q, db, identityAdminClient) {
+module.exports = function(_, crypto, Q, db, identityAdminClient, starRepository) {
 
   function md5(str) {
     var hash = crypto.createHash('md5');
@@ -40,12 +40,6 @@ module.exports = function(_, crypto, Q, db, identityAdminClient) {
     });
   }
 
-  function loadOneAuthor(project) {
-    return loadAuthors([project]).then(function(projects) {
-      return projects[0];
-    });
-  }
-
   function loadStars(projects) {
     if (projects.length === 0) {
       return Q.when(projects);
@@ -66,12 +60,6 @@ module.exports = function(_, crypto, Q, db, identityAdminClient) {
     });
   }
 
-  function loadOneStars(project) {
-    return loadStars([project]).then(function(projects) {
-      return projects[0];
-    });
-  }
-
   function serializeOne(project) {
     return {
       id: project.id,
@@ -83,6 +71,7 @@ module.exports = function(_, crypto, Q, db, identityAdminClient) {
       approved: project.approved,
       createdAt: project.createdAt,
       updatedAt: project.updatedAt,
+      makers: project.Makers,
       countStars: project.countStars
     };
   }
@@ -93,24 +82,57 @@ module.exports = function(_, crypto, Q, db, identityAdminClient) {
 
   return {
     findAll: function(query) {
-      return db.Project.findAll({ where: query })
-        .then(loadStars)
+      return db.Project.findAll({ where: query, include : [db.Maker] });
+    },
+
+    find: function(id) {
+      return db.Project.findById(id, { include : [db.Maker] });
+    },
+
+    create: function(projectData, author) {
+      var project = {
+        name: projectData.name,
+        shortDescription: projectData.shortDescription,
+        description: projectData.description,
+        url: projectData.url,
+        author: author,
+        approved: false
+      };
+      var projectCreated = db.Project.create(project);
+
+      if (projectData.isMaker) {
+        projectCreated = projectCreated.then(function(project) {
+          return this.addMaker(project, author)
+            .then(function() { return project; });
+        }.bind(this));
+      }
+
+      return projectCreated.then(function(project){
+        return starRepository.create(project.id, author)
+          .then(function() { return project; });
+      });
+    },
+
+    addMaker: function(project, username) {
+      return project.addMaker(db.Maker.build({
+        username: username,
+        approved: false
+      }));
+    },
+
+    serialize: function(projects) {
+      return loadStars(projects)
         .then(loadAuthors)
         .then(serialize);
     },
 
-    find: function(id) {
-      return db.Project.findById(id)
-        .then(loadOneStars)
-        .then(loadOneAuthor)
-        .then(serializeOne);
-    },
-
-    create: function(projectData, author) {
-      return db.Project.create(_.extend({}, projectData, { author: author, approved: false }))
-        .then(loadOneStars)
-        .then(loadOneAuthor)
-        .then(serializeOne);
+    serializeOne: function(project) {
+      return loadStars([project])
+        .then(loadAuthors)
+        .then(serialize)
+        .then(function(projects) {
+          return projects[0];
+        });
     }
   };
 };

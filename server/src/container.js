@@ -26,10 +26,10 @@ var identityAdminClient = new IdentityAdminClient(Q, requestJson, config.identit
   config.identity.adminUsername, config.identity.adminPassword);
 
 // Repositories
-var ProjectRepository = require('./repository/project-repository');
-var projectRepository = new ProjectRepository(_, crypto, Q, db, identityAdminClient);
 var StarRepository = require('./repository/star-repository');
 var starRepository = new StarRepository(_, db);
+var ProjectRepository = require('./repository/project-repository');
+var projectRepository = new ProjectRepository(_, crypto, Q, db, identityAdminClient, starRepository);
 
 // Controllers
 var ProjectController = require('./controller/project-controller');

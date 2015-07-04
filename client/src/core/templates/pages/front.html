@@ -98,6 +98,15 @@
                         <input ng-class="{error: createForm.url.$dirty && createForm.url.$invalid}" name="url" type="url" ng-model="ctrl.project.url" required />
                     </div>
                 </div>
+
+                <div class="form-row">
+                    <div class="form-label">
+                        <p>
+                            <input name="maker" type="checkbox" ng-model="ctrl.project.isMaker" />
+                            Cochez cette case si vous êtes fondateur ou co-fondateur du projet.
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <div class="separator-top">
