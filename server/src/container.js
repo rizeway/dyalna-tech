@@ -27,7 +27,7 @@ var identityAdminClient = new IdentityAdminClient(Q, requestJson, config.identit
 
 // Repositories
 var ProjectRepository = require('./repository/project-repository');
-var projectRepository = new ProjectRepository(_, crypto, db, identityAdminClient);
+var projectRepository = new ProjectRepository(_, crypto, Q, db, identityAdminClient);
 var StarRepository = require('./repository/star-repository');
 var starRepository = new StarRepository(_, db);
 

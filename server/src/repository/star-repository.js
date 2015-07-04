@@ -9,6 +9,15 @@ module.exports = function(_, db) {
       });
     },
 
+    remove: function(projectId, author) {
+      return db.Star.findOne({ where: {
+        author: author,
+        ProjectId: projectId
+      }}).then(function(star) {
+        return star.destroy();
+      });
+    },
+
     findForUser: function(author, query) {
       var filters = { author: author };
       if (query.projects) {

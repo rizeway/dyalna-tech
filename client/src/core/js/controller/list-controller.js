@@ -46,16 +46,6 @@ export class ListController {
     return this.$state.href('app.project', { id: project.id }, {absolute: true});
   }
 
-  star(project) {
-    this.ProjectRepository.star(project).then(star => {
-      project.countStars++;
-      this.loadStars();
-    });
-  }
-
-  isStared(project) {
-    return this.myStars.filter(star => star.ProjectId === project.id).length !== 0;
-  }
 }
 
 ListController.resolve = {

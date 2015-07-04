@@ -1,5 +1,5 @@
-/* @ngInject */
 class UserMenuController {
+  /* @ngInject */
   constructor($scope, $modal, $location, $state, DyalnaIdentity) {
     this.loggedin = DyalnaIdentity.isLoggedIn();
     this.user     = DyalnaIdentity.user;
@@ -48,7 +48,6 @@ class UserMenuController {
 
 }
 
-/* @ngInject */
 export function UserMenuDirective() {
   return {
     restrict: 'E',

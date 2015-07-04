@@ -2,6 +2,7 @@
     <div class="content">
         <div class="contenu">
             <div class="project single">
+                <project-star project="ctrl.project" user-stars="ctrl.myStars"></project-star>
                 <div class="project-date">
                     <div class="date">{{ ctrl.project.createdAt|date }}</div>
                     <div class="date">{{ ctrl.project.createdAt|date:'shortTime' }}</div>
@@ -12,9 +13,9 @@
 
                 <div class="project-description">{{ ctrl.project.shortDescription }}</div>
                 <div class="clear"></div>
-                <div class="separator-top project-long-description" marked="ctrl.project.description"></div>
             </div>
 
+            <div class="separator-top project-long-description" marked="ctrl.project.description"></div>
             <div class="fb-comments" data-width="668" data-href="{{ ctrl.absoluteUrl }}" data-colorscheme="light"></div>
         </div>
 

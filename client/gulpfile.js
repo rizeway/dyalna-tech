@@ -20,6 +20,7 @@ var PATH = {
   LESS_FILES: './src/**/*.less',
   TEMPLATES: 'src/*/**/*.html',
   VENDORS: [
+    './node_modules/babel-core/browser-polyfill.min.js',
     './bower_components/jquery/dist/jquery.js',
     './bower_components/angular/angular.js',
     './bower_components/angular-ui-router/release/angular-ui-router.js',

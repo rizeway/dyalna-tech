@@ -21,4 +21,9 @@ export class ProjectRepository {
     return this.$http.post(API_URL + '/' + project.id + '/star')
       .then(response => response.data.data);
   }
+
+  unstar(project) {
+    return this.$http.delete(API_URL + '/' + project.id + '/star')
+      .then(response => response.data.data);
+  }
 }

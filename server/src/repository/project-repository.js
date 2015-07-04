@@ -1,4 +1,4 @@
-module.exports = function(_, crypto, db, identityAdminClient) {
+module.exports = function(_, crypto, Q, db, identityAdminClient) {
 
   function md5(str) {
     var hash = crypto.createHash('md5');
@@ -23,7 +23,7 @@ module.exports = function(_, crypto, db, identityAdminClient) {
 
   function loadAuthors(projects) {
     if (projects.length === 0) {
-      return projects;
+      return Q.when(projects);
     }
 
     var authors = projects.map(function(project) {
@@ -41,14 +41,14 @@ module.exports = function(_, crypto, db, identityAdminClient) {
   }
 
   function loadOneAuthor(project) {
-    var projects = loadAuthors([project]);
-
-    return projects[0];
+    return loadAuthors([project]).then(function(projects) {
+      return projects[0];
+    });
   }
 
   function loadStars(projects) {
     if (projects.length === 0) {
-      return projects;
+      return Q.when(projects);
     }
 
     return db.sequelize.query('SELECT ProjectId AS pid, count(Id) AS countStars FROM Stars WHERE ProjectId IN (:projects) GROUP BY ProjectId', {
@@ -67,9 +67,9 @@ module.exports = function(_, crypto, db, identityAdminClient) {
   }
 
   function loadOneStars(project) {
-    var projects = loadStars([project]);
-
-    return projects[0];
+    return loadStars([project]).then(function(projects) {
+      return projects[0];
+    });
   }
 
   function serializeOne(project) {
@@ -100,7 +100,7 @@ module.exports = function(_, crypto, db, identityAdminClient) {
     },
 
     find: function(id) {
-      return db.Project.find(id)
+      return db.Project.findById(id)
         .then(loadOneStars)
         .then(loadOneAuthor)
         .then(serializeOne);
