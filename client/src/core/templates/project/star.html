@@ -1,16 +1,16 @@
-<a ng-if="ctrl.loggedin && !ctrl.loading && !ctrl.isStared" class="project-stars" href="" ng-click="ctrl.star()">
+<a ng-if="ctrl.loggedin && !ctrl.loading && !ctrl.isStared" class="project-stars" href="" ng-click="$event.stopPropagation(); ctrl.star()">
     <i class="fa fa-heart icon"></i>
     <span>{{ ctrl.project.countStars }}</span>
 </a>
-<a ng-if="ctrl.loggedin && !ctrl.loading && ctrl.isStared" class="project-stars stared" href="" ng-click="ctrl.unstar()">
+<a ng-if="ctrl.loggedin && !ctrl.loading && ctrl.isStared" class="project-stars stared" href="" ng-click="$event.stopPropagation(); ctrl.unstar()">
     <i class="fa fa-heart icon"></i>
     <span>{{ ctrl.project.countStars }}</span>
 </a>
-<a ng-if="!ctrl.loggedin" class="project-stars" href="">
+<a ng-if="!ctrl.loggedin" class="project-stars" href="" ng-click="$event.stopPropagation();">
     <i class="fa fa-heart icon"></i>
     <span>{{ ctrl.project.countStars }}</span>
 </a>
-<a ng-if="ctrl.loading" class="project-stars" href="">
+<a ng-if="ctrl.loading" class="project-stars" href="" ng-click="$event.stopPropagation();">
     <i class="fa fa-spin fa-spinner icon"></i>
     <span>{{ ctrl.project.countStars }}</span>
 </a>

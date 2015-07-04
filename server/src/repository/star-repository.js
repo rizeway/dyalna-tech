@@ -1,4 +1,4 @@
-module.exports = function(_, db) {
+module.exports = function(db) {
 
   return {
     create: function(projectId, author) {

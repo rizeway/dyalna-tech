@@ -14,6 +14,8 @@ app.get('/project', container.controllers.projectController.findAllAction);
 app.get('/project/:id', container.controllers.projectController.findOneAction);
 app.post('/project/:id/star', container.controllers.starController.createAction);
 app.delete('/project/:id/star', container.controllers.starController.removeAction);
+app.post('/project/:id/maker', container.controllers.projectController.addMakerAction);
+app.get('/project/:id/makers', container.controllers.projectController.makersAction);
 app.post('/project', container.middlewares.authentication, container.controllers.projectController.createAction);
 
 // Stars

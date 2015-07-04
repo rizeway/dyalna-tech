@@ -46,6 +46,10 @@ export class ListController {
     return this.$state.href('app.project', { id: project.id }, {absolute: true});
   }
 
+  goToProject(project) {
+    this.$state.transitionTo('app.project', { id: project.id });
+  }
+
 }
 
 ListController.resolve = {

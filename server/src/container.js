@@ -26,16 +26,18 @@ var identityAdminClient = new IdentityAdminClient(Q, requestJson, config.identit
   config.identity.adminUsername, config.identity.adminPassword);
 
 // Repositories
+var UserRepository = require('./repository/user-repository');
+var userRepository = new UserRepository(crypto, identityAdminClient);
 var StarRepository = require('./repository/star-repository');
-var starRepository = new StarRepository(_, db);
+var starRepository = new StarRepository(db);
 var ProjectRepository = require('./repository/project-repository');
-var projectRepository = new ProjectRepository(_, crypto, Q, db, identityAdminClient, starRepository);
+var projectRepository = new ProjectRepository(_, Q, db, starRepository, userRepository);
 
 // Controllers
 var ProjectController = require('./controller/project-controller');
 var StarController = require('./controller/star-controller');
 var controllers = {
-  projectController: new ProjectController(projectRepository),
+  projectController: new ProjectController(projectRepository, userRepository),
   starController: new StarController(starRepository)
 };
 

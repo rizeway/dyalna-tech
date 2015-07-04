@@ -20,8 +20,17 @@
         </div>
 
         <div class="sidebar">
-            <a class="sidebar-button" ui-sref="app.list">Voir les derniers applications algériennes</a>
-            <div data-ng-include="'core/utils/about.html'"></div>
+            <div class="project-makers">
+                <h3>
+                    Fondateurs
+                    <a ng-if="!ctrl.isMaker" href="" ng-click="ctrl.claimToBeMaker()" title="Je suis aussi un fondateur"><i class="fa fa-plus-circle"></i></a>
+                </h3>
+                <p ng-if="ctrl.project.makers.length === 0">Aucun fondateur connu.</p>
+                <a href="" class="maker" ng-repeat="maker in ctrl.makers">
+                    <img title="{{ maker.username }}" class="project-author" gravatar-src="maker.hash" gravatar-size="40">
+                </a>
+            </div>
+
         </div>
     </div>
 </div>

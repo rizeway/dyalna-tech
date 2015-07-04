@@ -2,18 +2,18 @@
     <div class="content">
         <div class="contenu">
             <div class="page">
-                <div ng-repeat="project in ctrl.projects" class="project resume">
+                <div ng-repeat="project in ctrl.projects" class="project resume" ng-click="ctrl.goToProject(project)">
                     <project-star project="project" user-stars="ctrl.myStars"></project-star>
                     <div class="project-date">
                         <div class="date">{{ project.createdAt|date }}</div>
                         <div class="date">{{ project.createdAt|date:'shortTime' }}</div>
                     </div>
-                    <a ui-sref="app.project({ id: project.id })" class="project-comments-count">
+                    <a class="project-comments-count">
                         <div class="fb-comments-count" data-href="{{ ctrl.getUrl(project) }}"></div>
                     </a>
                     <img class="project-author" gravatar-src="project.author.hash" gravatar-size="40">
 
-                    <h2><a ui-sref="app.project({ id: project.id })" class="project-name">{{ project.name }}</a></h2>
+                    <h2><a href="" class="project-name">{{ project.name }}</a></h2>
                     <div class="project-description">{{ project.shortDescription }}</div>
                 </div>
             </div>

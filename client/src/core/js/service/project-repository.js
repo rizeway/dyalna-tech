@@ -26,4 +26,14 @@ export class ProjectRepository {
     return this.$http.delete(API_URL + '/' + project.id + '/star')
       .then(response => response.data.data);
   }
+
+  addMaker(project) {
+    return this.$http.post(API_URL + '/' + project.id + '/maker')
+      .then(response => response.data.data);
+  }
+
+  getMakers(project) {
+    return this.$http.get(API_URL + '/' + project.id + '/makers')
+      .then(response => response.data.data);
+  }
 }

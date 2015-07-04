@@ -1,22 +1,8 @@
-module.exports = function(_, crypto, Q, db, identityAdminClient, starRepository) {
-
-  function md5(str) {
-    var hash = crypto.createHash('md5');
-    hash.update(str);
-
-    return hash.digest('hex');
-  }
-
-  function serializeAuthor(user) {
-    return {
-      username: user.username,
-      hash: md5(user.email.trim().toLowerCase())
-    };
-  }
+module.exports = function(_, Q, db, starRepository, userRepository) {
 
   function loadAuthor(project, users) {
-    var author = _.find(users, { username: project.author });
-    project.author = author ? serializeAuthor(author) : null;
+    var user = _.find(users, { username: project.author });
+    project.author = user ? user : null;
 
     return project;
   }
@@ -26,14 +12,11 @@ module.exports = function(_, crypto, Q, db, identityAdminClient, starRepository)
       return Q.when(projects);
     }
 
-    var authors = projects.map(function(project) {
+    var usernames = projects.map(function(project) {
       return project.author;
     });
-    var url = 'user?' + authors.map(function(author) {
-        return 'usernames[]=' + author;
-      }).join('&');
 
-    return identityAdminClient.get(url).then(function(users) {
+    return userRepository.findAll(usernames).then(function(users) {
       return projects.map(function(project) {
         return loadAuthor(project, users);
       });

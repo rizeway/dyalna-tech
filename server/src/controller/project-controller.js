@@ -1,4 +1,4 @@
-module.exports = function(projectRepository) {
+module.exports = function(projectRepository, userRepository) {
 
   return {
     findAllAction: function(req, res) {
@@ -16,19 +16,52 @@ module.exports = function(projectRepository) {
         .then(projectRepository.serializeOne.bind(projectRepository))
         .then(function(project) {
           return res.send({ status: 'success', data: project});
-        }, function() {
+        }).catch(function() {
           return res.status(500).send({ status: 'error', message: 'error fetching project' });
         });
     },
 
     createAction: function(req, res) {
       projectRepository.create(req.body, req.security.user.username)
-        .then(projectRepository.serializeOne)
+        .then(projectRepository.serializeOne.bind(projectRepository))
         .then(function(project) {
           return res.send({ status: 'success', data: project});
-        }, function(e) {
-          console.log(e);
+        }).catch(function() {
           return res.status(500).send({ status: 'error', message: 'database error' });
+        });
+    },
+
+    addMakerAction: function(req, res) {
+      return projectRepository.find(req.params.id)
+        .then(function(project) {
+          return projectRepository.addMaker(project, req.security.user.username);
+        })
+        .then(function() {
+          return projectRepository.find(req.params.id);
+        })
+        .then(projectRepository.serializeOne.bind(projectRepository))
+        .then(function(project) {
+          return res.send({ status: 'success', data: project});
+        }).catch(function() {
+          return res.status(500).send({ status: 'error', message: 'error adding maker' });
+        });
+    },
+
+    makersAction: function(req, res) {
+      return projectRepository.find(req.params.id)
+        .then(function(project) {
+          if (project.Makers.length === 0) {
+            return [];
+          }
+
+          return userRepository.findAll(project.Makers.map(function(maker) {
+            return maker.username;
+          }));
+        })
+        .then(function(users) {
+          return res.send({ status: 'success', data: users});
+        }).catch(function() {
+          return res.status(500).send({ status: 'error', message: 'error fetching makers' });
         });
     }
   };
