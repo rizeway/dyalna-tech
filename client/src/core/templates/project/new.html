@@ -1,0 +1,62 @@
+<form ng-submit="ctrl.create()" name="createForm">
+    <div>
+        <div ng-show="ctrl.error" class="alert alert-danger">
+            Une erreur est survenue lors de l'enregistrement de votre produit, vérifiez que vous avez bien rempli tous les champs du formulaire.
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">
+                <label>Nom de votre produit</label>
+            </div>
+            <div class="form-widget">
+                <input ng-class="{error: createForm.name.$dirty && createForm.name.$invalid}" name="name" type="text" ng-model="ctrl.project.name" required />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">
+                <label>Description courte</label>
+                <p>Une phrase courte pour décrire votre produit.</p>
+            </div>
+            <div class="form-widget">
+                <textarea class="small" ng-class="{error: createForm.shortDescription.$dirty && createForm.shortDescription.$invalid}" name="shortDescription" ng-model="ctrl.project.shortDescription" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">
+                <label>Description</label>
+                <p>Vous pouvez utilisez du markdown.</p>
+            </div>
+            <div class="form-widget">
+                <textarea ng-class="{error: createForm.description.$dirty && createForm.description.$invalid}" name="description" ng-model="ctrl.project.description" markdown-editor options="{ iconlibrary : 'fa', hiddenButtons: ['cmdPreview', 'cmdImage'], language: 'fr', fullscreen: false }" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">
+                <label>Url</label>
+                <p>Url menant à votre application ou à une page de détails sur votre produit.</p>
+            </div>
+            <div class="form-widget">
+                <input ng-class="{error: createForm.url.$dirty && createForm.url.$invalid}" name="url" type="url" ng-model="ctrl.project.url" required />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">
+                <p>
+                    <input name="maker" type="checkbox" ng-model="ctrl.project.isMaker" />
+                    Cochez cette case si vous êtes fondateur ou co-fondateur du projet.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="separator-top">
+        <button class="sidebar-button btn-icon-right" ng-class="{disabled: ctrl.loading || createForm.$invalid}">
+            Proposez votre produit
+            <i ng-if="ctrl.loading" class="fa fa-spin fa-spinner icon"></i>
+        </button>
+    </div>
+</form>

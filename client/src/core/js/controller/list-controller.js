@@ -1,13 +1,10 @@
 export class ListController {
   /* @ngInject */
-  constructor($scope, $state, DyalnaIdentity, ProjectRepository, StarRepository, projects) {
+  constructor($scope, $state, DyalnaIdentity, StarRepository, projects) {
     this.loggedin = DyalnaIdentity.isLoggedIn();
     this.user = DyalnaIdentity.user;
     this.projects = projects;
-    this.project = {};
-    this.createError = false;
     this.$state = $state;
-    this.ProjectRepository = ProjectRepository;
     this.StarRepository = StarRepository;
     this.myStars = [];
 
@@ -31,14 +28,6 @@ export class ListController {
       projects: this.projects.map(project => project.id)
     }).then(stars => {
       this.myStars = stars;
-    });
-  }
-
-  create() {
-    this.ProjectRepository.create(this.project).then(() => {
-      this.$state.reload();
-    }, () => {
-      this.createError = true;
     });
   }
 

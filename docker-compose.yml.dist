@@ -38,6 +38,8 @@ dyalnatech:
         MYSQL_USERNAME: 'root'
         MYSQL_PASSWORD: 'mypassword'
         MYSQL_DATABASE: 'tech'
+        GMAIL_USERNAME: 'myemail'
+        GMAIL_PASSWORD: 'mypassword'
 
 mysqlidentity:
     image: mysql

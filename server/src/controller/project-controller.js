@@ -1,4 +1,4 @@
-module.exports = function(projectRepository, userRepository) {
+module.exports = function(projectRepository, userRepository, mailer) {
 
   return {
     findAllAction: function(req, res) {
@@ -25,8 +25,13 @@ module.exports = function(projectRepository, userRepository) {
       projectRepository.create(req.body, req.security.user.username)
         .then(projectRepository.serializeOne.bind(projectRepository))
         .then(function(project) {
+          return mailer.sendAdminMail('new-project', 'New Project', { project: project }).then(function() {
+            return project;
+          });
+        })
+        .then(function(project) {
           return res.send({ status: 'success', data: project});
-        }).catch(function() {
+        }).catch(function(e) {
           return res.status(500).send({ status: 'error', message: 'database error' });
         });
     },
@@ -40,6 +45,11 @@ module.exports = function(projectRepository, userRepository) {
           return projectRepository.find(req.params.id);
         })
         .then(projectRepository.serializeOne.bind(projectRepository))
+        .then(function(project) {
+          return mailer.sendAdminMail('new-maker', 'New Maker', { project: project, maker: req.security.user.username }).then(function() {
+            return project;
+          });
+        })
         .then(function(project) {
           return res.send({ status: 'success', data: project});
         }).catch(function() {

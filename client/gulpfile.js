@@ -33,11 +33,13 @@ var PATH = {
     './bower_components/marked/lib/marked.js',
     './bower_components/angular-marked/angular-marked.js',
     './bower_components/angular-gravatar/build/angular-gravatar.js',
-    './bower_components/angular-easyfb/angular-easyfb.js'
+    './bower_components/angular-easyfb/angular-easyfb.js',
+    './bower_components/angular-growl/build/angular-growl.js'
   ],
   VENDORS_CSS: [
     './bower_components/angular-motion/dist/angular-motion.css',
-    './bower_components/bootstrap-markdown/css/bootstrap-markdown.css'
+    './bower_components/bootstrap-markdown/css/bootstrap-markdown.css',
+    './bower_components/angular-growl/build/angular-growl.min.css'
   ],
   FONTS: [
     './bower_components/fontawesome/fonts/*'

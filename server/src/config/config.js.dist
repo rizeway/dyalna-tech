@@ -16,5 +16,18 @@ module.exports = {
       host: process.env.MYSQL_HOST,
       dialect: 'mysql'
     }
+  },
+
+  mailer: {
+    transport: {
+      service: 'Gmail',
+      auth: {
+        user: process.env.GMAIL_USERNAME,
+        pass: process.env.GMAIL_PASSWORD
+      }
+    },
+    from: 'Dyalna Tech <dyalnatech@rizeway.com>',
+    to: 'dyalnatech@rizeway.com'
   }
+
 };

@@ -1,9 +1,10 @@
 export class ProjectController {
   /* @ngInject */
-  constructor($state, $scope, ProjectRepository, StarRepository, DyalnaIdentity, project) {
+  constructor($state, $scope, ProjectRepository, StarRepository, DyalnaIdentity, growl, project) {
     this.StarRepository = StarRepository;
     this.DyalnaIdentity = DyalnaIdentity;
     this.ProjectRepository = ProjectRepository;
+    this.growl = growl;
     this.project = project;
     this.absoluteUrl = $state.href('app.project', { id: project.id }, {absolute: true});
     this.myStars = [];
@@ -50,6 +51,7 @@ export class ProjectController {
         this.project = project;
         this.loadIsMaker();
         this.loadMakers();
+        this.growl.addSuccessMessage('Votre demande d\'ajout en tant que fondateur va être prise en compte dans les plus brefs délais.');
       });
   }
 }

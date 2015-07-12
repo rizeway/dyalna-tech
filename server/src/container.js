@@ -1,3 +1,5 @@
+var path = require('path');
+
 // Vendor
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
@@ -5,9 +7,12 @@ var dyalnaIdentity = require('node-dyalna-identity');
 var requestJson = require('request-json');
 var _ = require('lodash');
 var Q = require('q');
+var emailTemplates = require('email-templates');
+var nodemailer = require('nodemailer');
 
 // Config
 var config = require('./config/config');
+var templatesDirectory = path.resolve(__dirname, 'templates');
 
 // Middlewares
 var middlewares = {
@@ -19,6 +24,10 @@ var middlewares = {
 
 // Database
 var db = require('./models');
+
+// Mailer
+var Mailer = require('./mailer/mailer');
+var mailer = new Mailer(Q, nodemailer, emailTemplates, config.mailer, templatesDirectory);
 
 // Some helper services
 var IdentityAdminClient = require('./helper/identity-admin-client');
@@ -37,7 +46,7 @@ var projectRepository = new ProjectRepository(_, Q, db, starRepository, userRepo
 var ProjectController = require('./controller/project-controller');
 var StarController = require('./controller/star-controller');
 var controllers = {
-  projectController: new ProjectController(projectRepository, userRepository),
+  projectController: new ProjectController(projectRepository, userRepository, mailer),
   starController: new StarController(starRepository)
 };
 
