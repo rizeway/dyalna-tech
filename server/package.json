@@ -5,10 +5,13 @@
   "dependencies": {
     "body-parser": "~1.12.0",
     "db-migrate": "~0.9.10",
+    "email-templates": "^2.0.0-beta.4",
     "express": "~4.12.2",
+    "handlebars": "^3.0.3",
     "lodash": "^3.7.0",
     "mysql": "~2.5.5",
     "node-dyalna-identity": "^1.0.0",
+    "nodemailer": "^1.4.0",
     "q": "^1.4.1",
     "request-json": "^0.5.2",
     "sequelize": "~3.0.0"
