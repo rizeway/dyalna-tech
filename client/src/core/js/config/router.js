@@ -1,4 +1,3 @@
-import {ListController} from '../controller/list-controller';
 import {ProjectController} from '../controller/project-controller';
 
 export /* @ngInject */ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
@@ -12,7 +11,6 @@ export /* @ngInject */ function Router($locationProvider, $stateProvider, $urlRo
       url: '/',
       controller: 'ListController as ctrl',
       templateUrl: 'core/pages/front.html',
-      resolve: ListController.resolve,
       security: false
     })
     .state('app.project', {

@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <a ng-show="ctrl.hasNextPage" class="rizeway-pager pointer" ng-click="ctrl.loadNextPage()">
+            <a ng-show="!ctrl.loading && ctrl.hasNextPage" class="rizeway-pager pointer" ng-click="ctrl.loadNextPage()">
                 Produits suivants
             </a>
 

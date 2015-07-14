@@ -63,7 +63,3 @@ export class ListController {
   }
 
 }
-
-ListController.resolve = {
-  projects: /* @ngInject */ ProjectRepository => ProjectRepository.findAll()
-};
