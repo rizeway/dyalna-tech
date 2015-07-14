@@ -1,17 +1,27 @@
+const MAX_PROJECTS_BY_PAGE = 25;
+
 export class ListController {
   /* @ngInject */
-  constructor($scope, $state, DyalnaIdentity, StarRepository, projects) {
+  constructor($scope, $state, DyalnaIdentity, StarRepository, ProjectRepository) {
     this.loggedin = DyalnaIdentity.isLoggedIn();
     this.user = DyalnaIdentity.user;
-    this.projects = projects;
     this.$state = $state;
     this.StarRepository = StarRepository;
+    this.ProjectRepository = ProjectRepository;
     this.myStars = [];
+    this.page = 1;
+    this.hasNextPage = true;
+    this.pages = {};
 
     $scope.$on('DyalnaIdentity.login', () => {
       this.loggedin = true;
       this.user = DyalnaIdentity.user;
-      this.loadStars();
+      this.myStars = [];
+      var allProjects = [];
+      angular.forEach(this.pages, projects => {
+        allProjects = allProjects.concat(projects);
+      });
+      this.loadStars(allProjects);
     });
 
     $scope.$on('DyalnaIdentity.logout', () => {
@@ -20,14 +30,27 @@ export class ListController {
       this.myStars = [];
     });
 
-    this.loadStars();
+    this.loadNextPage();
   }
 
-  loadStars() {
+  loadStars(projects) {
     this.StarRepository.findMyStars({
-      projects: this.projects.map(project => project.id)
+      projects: projects.map(project => project.id)
     }).then(stars => {
-      this.myStars = stars;
+      this.myStars = this.myStars.concat(stars);
+    });
+  }
+
+  loadNextPage() {
+    this.loading = true;
+    this.ProjectRepository.findAll(this.page).then(projects => {
+      this.pages[this.page] = projects;
+      this.hasNextPage = projects.length === MAX_PROJECTS_BY_PAGE;
+      this.page++;
+      this.loading = false;
+      if (this.loggedin) {
+        this.loadStars(projects);
+      }
     });
   }
 

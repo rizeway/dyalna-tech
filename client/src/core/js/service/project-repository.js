@@ -5,8 +5,8 @@ export class ProjectRepository {
     this.$http = $http;
   }
 
-  findAll() {
-    return this.$http.get(API_URL).then(response => response.data.data);
+  findAll(page) {
+    return this.$http.get(API_URL + '?page=' + page).then(response => response.data.data);
   }
 
   findOne(id) {

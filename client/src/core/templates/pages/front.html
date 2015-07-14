@@ -1,16 +1,13 @@
 <div>
     <div class="content">
         <div class="contenu">
-            <div class="page">
-                <div ng-repeat="project in ctrl.projects" class="project resume" ng-click="ctrl.goToProject(project)">
+            <div class="page" ng-repeat="projects in ctrl.pages">
+                <div ng-repeat="project in projects" class="project resume" ng-click="ctrl.goToProject(project)">
                     <project-star project="project" user-stars="ctrl.myStars"></project-star>
                     <div class="project-date">
                         <div class="date">{{ project.createdAt|date }}</div>
                         <div class="date">{{ project.createdAt|date:'shortTime' }}</div>
                     </div>
-                    <a class="project-comments-count">
-                        <div class="fb-comments-count" data-href="{{ ctrl.getUrl(project) }}"></div>
-                    </a>
                     <img class="project-author" gravatar-src="project.author.hash" gravatar-size="40">
 
                     <h2><a href="" class="project-name">{{ project.name }}</a></h2>
@@ -18,6 +15,13 @@
                 </div>
             </div>
 
+            <a ng-show="ctrl.hasNextPage" class="rizeway-pager pointer" ng-click="ctrl.loadNextPage()">
+                Produits suivants
+            </a>
+
+            <div ng-show="ctrl.loading">
+                <i class="fa fa-spin fa-spinner"></i> Chargement des produits en cours
+            </div>
         </div>
 
         <div class="sidebar">

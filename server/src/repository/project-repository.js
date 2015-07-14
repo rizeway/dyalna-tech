@@ -63,9 +63,11 @@ module.exports = function(_, Q, db, starRepository, userRepository) {
     return projects.map(serializeOne);
   }
 
+  var projectsByPage = 25;
+
   return {
-    findAll: function(query) {
-      return db.Project.findAll({ where: query, include : [db.Maker] });
+    findAll: function(filters, page) {
+      return db.Project.findAll({ where: filters, include : [db.Maker], limit: projectsByPage, offset: (page - 1) * projectsByPage });
     },
 
     find: function(id) {

@@ -2,7 +2,7 @@ module.exports = function(projectRepository, userRepository, mailer) {
 
   return {
     findAllAction: function(req, res) {
-      return projectRepository.findAll(req.query)
+      return projectRepository.findAll(req.query.filters, req.query.page ? req.query.page : 1)
         .then(projectRepository.serialize.bind(projectRepository))
         .then(function(projects) {
           return res.send({ status: 'success', data: projects });
