@@ -41,7 +41,7 @@ export class ProjectController {
   loadMakers() {
     this.ProjectRepository.getMakers(this.project)
       .then(makers => {
-        this.makers = makers.filter(maker => maker.approved);
+        this.makers = makers;
       });
   }
 

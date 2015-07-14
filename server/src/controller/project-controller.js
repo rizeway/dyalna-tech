@@ -60,11 +60,14 @@ module.exports = function(projectRepository, userRepository, mailer) {
     makersAction: function(req, res) {
       return projectRepository.find(req.params.id)
         .then(function(project) {
-          if (project.Makers.length === 0) {
+          var makers = project.Makers.filter(function(maker) {
+            return maker.approved;
+          });
+          if (makers.length === 0) {
             return [];
           }
 
-          return userRepository.findAll(project.Makers.map(function(maker) {
+          return userRepository.findAll(makers.map(function(maker) {
             return maker.username;
           }));
         })
