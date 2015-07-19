@@ -9,6 +9,7 @@ export class ProjectController {
     this.absoluteUrl = $state.href('app.project', { id: project.id }, {absolute: true});
     this.myStars = [];
     this.makers = [];
+    this.likers = [];
     this.isMaker = false;
     $scope.$on('DyalnaIdentity.login', () => {
       this.loadStars();
@@ -21,6 +22,7 @@ export class ProjectController {
     });
 
     this.loadStars();
+    this.loadLikers();
     this.loadMakers();
     this.loadIsMaker();
   }
@@ -44,6 +46,15 @@ export class ProjectController {
       .then(makers => {
         this.loadingMakers = false;
         this.makers = makers;
+      });
+  }
+
+  loadLikers() {
+    this.loadingLikers = true;
+    this.ProjectRepository.getLikers(this.project)
+      .then(likers => {
+        this.loadingLikers = false;
+        this.likers = likers;
       });
   }
 

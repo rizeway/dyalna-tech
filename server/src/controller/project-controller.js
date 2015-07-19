@@ -87,7 +87,7 @@ module.exports = function(projectRepository, userRepository, mailer, feedGenerat
           }));
         })
         .then(function(users) {
-          return res.send({ status: 'success', data: users});
+          return res.send({ status: 'success', data: users });
         }).catch(function() {
           return res.status(500).send({ status: 'error', message: 'error fetching makers' });
         });

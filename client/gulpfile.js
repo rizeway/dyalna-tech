@@ -50,7 +50,7 @@ var PATH = {
     './bower_components/dyalna-ui/images/**'
   ],
   WEBCONTENT: [
-    './src/favicon.html'
+    './src/favicon.ico'
   ],
 
   APP: 'app.js',

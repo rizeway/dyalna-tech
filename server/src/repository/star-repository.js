@@ -25,5 +25,10 @@ module.exports = function(db) {
       }
       return db.Star.findAll({ where: filters });
     },
+
+    findForProject: function(projectId) {
+      var filters = { ProjectId: projectId };
+      return db.Star.findAll({ where: filters });
+    },
   };
 };

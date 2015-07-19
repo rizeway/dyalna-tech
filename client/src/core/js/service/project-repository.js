@@ -36,4 +36,9 @@ export class ProjectRepository {
     return this.$http.get(API_URL + '/' + project.id + '/makers')
       .then(response => response.data.data);
   }
+
+  getLikers(project) {
+    return this.$http.get(API_URL + '/' + project.id + '/stars')
+      .then(response => response.data.data);
+  }
 }

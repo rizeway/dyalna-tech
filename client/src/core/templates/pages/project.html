@@ -20,17 +20,23 @@
         </div>
 
         <div class="sidebar">
-            <div class="project-makers" ng-if="!ctrl.loadingMakers">
+            <div class="project-makers sidebar-block" ng-if="!ctrl.loadingMakers">
                 <h3>
                     Fondateurs
                     <a ng-if="!ctrl.isMaker" href="" ng-click="ctrl.claimToBeMaker()" title="Je suis aussi un fondateur"><i class="fa fa-plus-circle"></i></a>
                 </h3>
-                <p ng-if="ctrl.makers.length === 0">Aucun fondateur approuvé.</p>
+                <div ng-if="ctrl.makers.length === 0">Aucun fondateur approuvé.</div>
                 <a href="" class="maker" ng-repeat="maker in ctrl.makers">
                     <img title="{{ maker.username }}" class="project-author" gravatar-src="maker.hash" gravatar-size="40">
                 </a>
             </div>
 
+            <div class="project-likers sidebar-block separator-top" ng-if="!ctrl.loadingLikers && ctrl.likers.length !== 0">
+                <h3>Ils aiment {{ ctrl.project.name }}</h3>
+                <a href="" class="maker" ng-repeat="liker in ctrl.likers">
+                    <img title="{{ liker.username }}" gravatar-src="star.hash" gravatar-size="40">
+                </a>
+            </div>
         </div>
     </div>
 </div>

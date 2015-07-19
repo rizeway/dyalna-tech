@@ -52,7 +52,7 @@ var ProjectController = require('./controller/project-controller');
 var StarController = require('./controller/star-controller');
 var controllers = {
   projectController: new ProjectController(projectRepository, userRepository, mailer, feedGenerator),
-  starController: new StarController(starRepository)
+  starController: new StarController(starRepository, userRepository)
 };
 
 module.exports = {

@@ -19,6 +19,7 @@ app.post('/project/:id/star', container.middlewares.authentication, container.co
 app.delete('/project/:id/star', container.middlewares.authentication, container.controllers.starController.removeAction);
 app.post('/project/:id/maker', container.middlewares.authentication, container.controllers.projectController.addMakerAction);
 app.get('/project/:id/makers', container.controllers.projectController.makersAction);
+app.get('/project/:id/stars', container.controllers.starController.projectStarsAction);
 app.post('/project', container.middlewares.authentication, container.controllers.projectController.createAction);
 
 // Stars

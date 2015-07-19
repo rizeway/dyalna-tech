@@ -1,4 +1,4 @@
-module.exports = function(starRepository) {
+module.exports = function(starRepository, userRepository) {
 
   return {
     createAction: function(req, res) {
@@ -23,7 +23,22 @@ module.exports = function(starRepository) {
       }, function() {
         return res.status(500).send({ status: 'error', message: 'error fetching stars' });
       });
+    },
+
+    projectStarsAction: function(req, res) {
+      return starRepository.findForProject(req.params.id)
+        .then(function(stars) {
+          return userRepository.findAll(stars.map(function(star) {
+            return star.author;
+          }));
+        })
+        .then(function(users) {
+          return res.send({ status: 'success', data: users });
+        }).catch(function() {
+          return res.status(500).send({ status: 'error', message: 'error fetching stars' });
+        });
     }
+
   };
 
 };
