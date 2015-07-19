@@ -32,11 +32,11 @@ module.exports = {
       },
       createdAt: {
         notNull: true,
-        type: 'date'
+        type: 'datetime'
       },
       updatedAt: {
         notNull: true,
-        type: 'date'
+        type: 'datetime'
       }
     }, function() {
       db.addIndex('Makers', 'maker_natural_key', ['ProjectId', 'username'], true, done);

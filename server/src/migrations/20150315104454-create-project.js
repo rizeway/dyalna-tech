@@ -26,11 +26,11 @@ module.exports = {
       },
       createdAt: {
         notNull: true,
-        type: 'date'
+        type: 'datetime'
       },
       updatedAt: {
         notNull: true,
-        type: 'date'
+        type: 'datetime'
       }
     }, done);
   },

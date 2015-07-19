@@ -35,7 +35,9 @@ var PATH = {
     './bower_components/angular-gravatar/build/angular-gravatar.js',
     './bower_components/angular-easyfb/angular-easyfb.js',
     './bower_components/angular-growl/build/angular-growl.js',
-    './bower_components/angular-loading-bar/build/loading-bar.js'
+    './bower_components/angular-loading-bar/build/loading-bar.js',
+    './bower_components/angulartics/dist/angulartics.min.js',
+    './bower_components/angulartics/dist/angulartics-ga.min.js'
   ],
   VENDORS_CSS: [
     './bower_components/angular-motion/dist/angular-motion.css',

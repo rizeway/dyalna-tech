@@ -30,6 +30,7 @@ angular
     'ezfb',
     'angular-growl',
     'angular-loading-bar',
+    'angulartics', 'angulartics.google.analytics',
     DyalnaIdentityModule
   ])
   .config(Router)
