@@ -75,7 +75,14 @@ module.exports = function(_, Q, db, starRepository, userRepository) {
       }
       filters.approved = true;
 
-      return db.Project.findAll({ where: filters, include : [db.Maker], limit: projectsByPage, offset: (page - 1) * projectsByPage });
+      return db.Project.findAll({
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+        where: filters,
+        include : [db.Maker],
+        limit: projectsByPage,
+        offset: (page - 1) * projectsByPage });
     },
 
     find: function(id) {

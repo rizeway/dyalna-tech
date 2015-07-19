@@ -19,6 +19,7 @@ class ProjectNewController {
       this.loading = false;
       this.growl.addSuccessMessage('Votre projet a été soumis, il sera traité dans les plus brefs délais.');
       this.callback({ project: this.project });
+      this.project = {};
     }, () => {
       this.loading = false;
       this.error = true;
