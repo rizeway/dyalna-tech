@@ -20,7 +20,7 @@
         </div>
 
         <div class="sidebar">
-            <div class="project-makers">
+            <div class="project-makers" ng-if="!ctrl.loadingMakers">
                 <h3>
                     Fondateurs
                     <a ng-if="!ctrl.isMaker" href="" ng-click="ctrl.claimToBeMaker()" title="Je suis aussi un fondateur"><i class="fa fa-plus-circle"></i></a>

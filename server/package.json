@@ -14,6 +14,7 @@
     "nodemailer": "^1.4.0",
     "q": "^1.4.1",
     "request-json": "^0.5.2",
+    "rss": "^1.1.1",
     "sequelize": "~3.0.0"
   }
 }

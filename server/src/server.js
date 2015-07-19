@@ -9,6 +9,9 @@ app.get('/', function (req, res) {
   res.send('Dyalna Tech Server Running ...');
 });
 
+// Feed
+app.get('/feed', container.controllers.projectController.feedAction);
+
 // Project & Stars
 app.get('/project', container.controllers.projectController.findAllAction);
 app.get('/project/:id', container.controllers.projectController.findOneAction);

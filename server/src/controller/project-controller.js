@@ -1,6 +1,21 @@
-module.exports = function(projectRepository, userRepository, mailer) {
+module.exports = function(projectRepository, userRepository, mailer, feedGenerator) {
 
   return {
+
+    feedAction: function(req, res) {
+      return projectRepository.findAll()
+        .then(projectRepository.serialize.bind(projectRepository))
+        .then(function(projects) {
+          return feedGenerator.generate(projects);
+        })
+        .then(function(xml) {
+          res.set('Content-Type', 'application/rss+xml');
+          return res.send(xml);
+        }).catch(function() {
+          return res.status(500).send({ status: 'error', message: 'error fetching projects' });
+        });
+    },
+
     findAllAction: function(req, res) {
       return projectRepository.findAll(req.query.filters, req.query.page ? req.query.page : 1)
         .then(projectRepository.serialize.bind(projectRepository))

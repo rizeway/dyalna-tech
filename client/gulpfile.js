@@ -18,7 +18,7 @@ var PATH = {
   JS_ENTRY: './src/core/js/app.js',
   LESS: './src/core/less/main.less',
   LESS_FILES: './src/**/*.less',
-  TEMPLATES: 'src/*/**/*.html',
+  TEMPLATES: './src/*/**/*.html',
   VENDORS: [
     './node_modules/babel-core/browser-polyfill.min.js',
     './bower_components/jquery/dist/jquery.js',
@@ -34,18 +34,23 @@ var PATH = {
     './bower_components/angular-marked/angular-marked.js',
     './bower_components/angular-gravatar/build/angular-gravatar.js',
     './bower_components/angular-easyfb/angular-easyfb.js',
-    './bower_components/angular-growl/build/angular-growl.js'
+    './bower_components/angular-growl/build/angular-growl.js',
+    './bower_components/angular-loading-bar/build/loading-bar.js'
   ],
   VENDORS_CSS: [
     './bower_components/angular-motion/dist/angular-motion.css',
     './bower_components/bootstrap-markdown/css/bootstrap-markdown.css',
-    './bower_components/angular-growl/build/angular-growl.min.css'
+    './bower_components/angular-growl/build/angular-growl.min.css',
+    './bower_components/angular-loading-bar/build/loading-bar.css'
   ],
   FONTS: [
     './bower_components/fontawesome/fonts/*'
   ],
   IMAGES: [
     './bower_components/dyalna-ui/images/**'
+  ],
+  WEBCONTENT: [
+    './src/favicon.html'
   ],
 
   APP: 'app.js',
@@ -65,6 +70,11 @@ gulp.task('clean', function(done){
 
 gulp.task('build/index', function() {
   gulp.src(PATH.INDEX)
+    .pipe(gulp.dest(PATH.OUTPUT));
+});
+
+gulp.task('build/webcontent', function() {
+  gulp.src(PATH.WEBCONTENT)
     .pipe(gulp.dest(PATH.OUTPUT));
 });
 
@@ -115,7 +125,7 @@ gulp.task('build/images', function() {
     .pipe(gulp.dest(PATH.OUTPUTIMAGES));
 });
 
-gulp.task('build', ['build/index', 'build/app', 'build/less', 'build/vendor', 'build/vendor/css', 'build/templates', 'build/fonts', 'build/images']);
+gulp.task('build', ['build/index', 'build/webcontent', 'build/app', 'build/less', 'build/vendor', 'build/vendor/css', 'build/templates', 'build/fonts', 'build/images']);
 
 // WATCH FILES FOR CHANGES
 gulp.task('watch', function() {

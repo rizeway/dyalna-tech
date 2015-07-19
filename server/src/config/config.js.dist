@@ -28,6 +28,18 @@ module.exports = {
     },
     from: 'Dyalna Tech <dyalnatech@rizeway.com>',
     to: 'dyalnatech@rizeway.com'
+  },
+
+  feed: {
+    title: 'Dyalna Tech, Applications web et mobiles en Algérie',
+    description: 'Toutes les dernières applications, sites web et applis mobiles du web Algérien',
+    feedUrl: 'http://tech.dyalna.com/tech/feed',
+    siteUrl: 'http://tech.dyalna.com',
+    imageUrl: 'http://tech.dyalna.com/images/logo.png',
+    author: 'Rizeway',
+    categories: ['Web', 'Mobile', 'High-Tech', 'Algérie', 'Startup'],
+    ttl: '60',
+    projectUrl: 'http://tech.dyalna.com/#!/project/{id}'
   }
 
 };

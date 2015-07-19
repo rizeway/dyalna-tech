@@ -67,6 +67,9 @@ module.exports = function(_, Q, db, starRepository, userRepository) {
 
   return {
     findAll: function(filters, page) {
+      if (!page) {
+        page = 1;
+      }
       if (!filters) {
         filters = {};
       }

@@ -39,8 +39,10 @@ export class ProjectController {
   }
 
   loadMakers() {
+    this.loadingMakers = true;
     this.ProjectRepository.getMakers(this.project)
       .then(makers => {
+        this.loadingMakers = false;
         this.makers = makers;
       });
   }

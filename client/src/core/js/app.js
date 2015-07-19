@@ -29,6 +29,7 @@ angular
     'ui.gravatar',
     'ezfb',
     'angular-growl',
+    'angular-loading-bar',
     DyalnaIdentityModule
   ])
   .config(Router)

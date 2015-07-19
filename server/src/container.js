@@ -9,6 +9,7 @@ var _ = require('lodash');
 var Q = require('q');
 var emailTemplates = require('email-templates');
 var nodemailer = require('nodemailer');
+var RSS = require('rss');
 
 // Config
 var config = require('./config/config');
@@ -34,6 +35,10 @@ var IdentityAdminClient = require('./helper/identity-admin-client');
 var identityAdminClient = new IdentityAdminClient(Q, requestJson, config.identity.host, config.identity.token,
   config.identity.adminUsername, config.identity.adminPassword);
 
+// Feed
+var FeedGenerator = require('./feed/generator');
+var feedGenerator = new FeedGenerator(RSS, config.feed);
+
 // Repositories
 var UserRepository = require('./repository/user-repository');
 var userRepository = new UserRepository(crypto, identityAdminClient);
@@ -46,7 +51,7 @@ var projectRepository = new ProjectRepository(_, Q, db, starRepository, userRepo
 var ProjectController = require('./controller/project-controller');
 var StarController = require('./controller/star-controller');
 var controllers = {
-  projectController: new ProjectController(projectRepository, userRepository, mailer),
+  projectController: new ProjectController(projectRepository, userRepository, mailer, feedGenerator),
   starController: new StarController(starRepository)
 };
 
