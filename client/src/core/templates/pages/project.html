@@ -34,7 +34,7 @@
             <div class="project-likers sidebar-block separator-top" ng-if="!ctrl.loadingLikers && ctrl.likers.length !== 0">
                 <h3>Ils aiment {{ ctrl.project.name }}</h3>
                 <a href="" class="maker" ng-repeat="liker in ctrl.likers">
-                    <img title="{{ liker.username }}" gravatar-src="star.hash" gravatar-size="40">
+                    <img title="{{ liker.username }}" gravatar-src="liker.hash" gravatar-size="40">
                 </a>
             </div>
         </div>
