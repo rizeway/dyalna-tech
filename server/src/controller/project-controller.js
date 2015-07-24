@@ -27,7 +27,7 @@ module.exports = function(projectRepository, userRepository, mailer, feedGenerat
     },
 
     findOneAction: function(req, res) {
-      return projectRepository.find(req.params.id)
+      return projectRepository.find(req.params.slug)
         .then(projectRepository.serializeOne.bind(projectRepository))
         .then(function(project) {
           return res.send({ status: 'success', data: project});
@@ -46,18 +46,18 @@ module.exports = function(projectRepository, userRepository, mailer, feedGenerat
         })
         .then(function(project) {
           return res.send({ status: 'success', data: project});
-        }).catch(function(e) {
+        }).catch(function() {
           return res.status(500).send({ status: 'error', message: 'database error' });
         });
     },
 
     addMakerAction: function(req, res) {
-      return projectRepository.find(req.params.id)
+      return projectRepository.find(req.params.slug)
         .then(function(project) {
           return projectRepository.addMaker(project, req.security.user.username);
         })
         .then(function() {
-          return projectRepository.find(req.params.id);
+          return projectRepository.find(req.params.slug);
         })
         .then(projectRepository.serializeOne.bind(projectRepository))
         .then(function(project) {
@@ -73,7 +73,7 @@ module.exports = function(projectRepository, userRepository, mailer, feedGenerat
     },
 
     makersAction: function(req, res) {
-      return projectRepository.find(req.params.id)
+      return projectRepository.find(req.params.slug)
         .then(function(project) {
           var makers = project.Makers.filter(function(maker) {
             return maker.approved;

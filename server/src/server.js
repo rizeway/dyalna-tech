@@ -14,12 +14,12 @@ app.get('/feed', container.controllers.projectController.feedAction);
 
 // Project & Stars
 app.get('/project', container.controllers.projectController.findAllAction);
-app.get('/project/:id', container.controllers.projectController.findOneAction);
-app.post('/project/:id/star', container.middlewares.authentication, container.controllers.starController.createAction);
-app.delete('/project/:id/star', container.middlewares.authentication, container.controllers.starController.removeAction);
-app.post('/project/:id/maker', container.middlewares.authentication, container.controllers.projectController.addMakerAction);
-app.get('/project/:id/makers', container.controllers.projectController.makersAction);
-app.get('/project/:id/stars', container.controllers.starController.projectStarsAction);
+app.get('/project/:slug', container.controllers.projectController.findOneAction);
+app.post('/project/:slug/star', container.middlewares.authentication, container.controllers.starController.createAction);
+app.delete('/project/:slug/star', container.middlewares.authentication, container.controllers.starController.removeAction);
+app.post('/project/:slug/maker', container.middlewares.authentication, container.controllers.projectController.addMakerAction);
+app.get('/project/:slug/makers', container.controllers.projectController.makersAction);
+app.get('/project/:slug/stars', container.controllers.starController.projectStarsAction);
 app.post('/project', container.middlewares.authentication, container.controllers.projectController.createAction);
 
 // Stars

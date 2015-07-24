@@ -10,6 +10,7 @@ var Q = require('q');
 var emailTemplates = require('email-templates');
 var nodemailer = require('nodemailer');
 var RSS = require('rss');
+var slug = require('slug');
 
 // Config
 var config = require('./config/config');
@@ -34,6 +35,8 @@ var mailer = new Mailer(Q, nodemailer, emailTemplates, config.mailer, templatesD
 var IdentityAdminClient = require('./helper/identity-admin-client');
 var identityAdminClient = new IdentityAdminClient(Q, requestJson, config.identity.host, config.identity.token,
   config.identity.adminUsername, config.identity.adminPassword);
+var SlugGenerator = require('./helper/slug-generator');
+var slugGenerator = new SlugGenerator(slug);
 
 // Feed
 var FeedGenerator = require('./feed/generator');
@@ -45,14 +48,14 @@ var userRepository = new UserRepository(crypto, identityAdminClient);
 var StarRepository = require('./repository/star-repository');
 var starRepository = new StarRepository(db);
 var ProjectRepository = require('./repository/project-repository');
-var projectRepository = new ProjectRepository(_, Q, db, starRepository, userRepository);
+var projectRepository = new ProjectRepository(_, Q, db, starRepository, userRepository, slugGenerator);
 
 // Controllers
 var ProjectController = require('./controller/project-controller');
 var StarController = require('./controller/star-controller');
 var controllers = {
   projectController: new ProjectController(projectRepository, userRepository, mailer, feedGenerator),
-  starController: new StarController(starRepository, userRepository)
+  starController: new StarController(starRepository, projectRepository, userRepository)
 };
 
 module.exports = {

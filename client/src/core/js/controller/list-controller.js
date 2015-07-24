@@ -55,11 +55,11 @@ export class ListController {
   }
 
   getUrl(project) {
-    return this.$state.href('app.project', { id: project.id }, {absolute: true});
+    return this.$state.href('app.project', { slug: project.slug }, {absolute: true});
   }
 
   goToProject(project) {
-    this.$state.transitionTo('app.project', { id: project.id });
+    this.$state.transitionTo('app.project', { slug: project.slug });
   }
 
 }

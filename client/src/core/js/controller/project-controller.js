@@ -6,7 +6,7 @@ export class ProjectController {
     this.ProjectRepository = ProjectRepository;
     this.growl = growl;
     this.project = project;
-    this.absoluteUrl = $state.href('app.project', { id: project.id }, {absolute: true});
+    this.absoluteUrl = $state.href('app.project', { slug: project.slug }, {absolute: true});
     this.myStars = [];
     this.makers = [];
     this.likers = [];
@@ -70,5 +70,5 @@ export class ProjectController {
 }
 
 ProjectController.resolve = {
-  project: /* @ngInject */ ($stateParams, ProjectRepository) => ProjectRepository.findOne($stateParams.id)
+  project: /* @ngInject */ ($stateParams, ProjectRepository) => ProjectRepository.findOne($stateParams.slug)
 };

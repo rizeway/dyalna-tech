@@ -14,7 +14,7 @@ export /* @ngInject */ function Router($locationProvider, $stateProvider, $urlRo
       security: false
     })
     .state('app.project', {
-      url: '/project/:id',
+      url: '/project/:slug',
       controller: 'ProjectController as ctrl',
       templateUrl: 'core/pages/project.html',
       resolve: ProjectController.resolve,

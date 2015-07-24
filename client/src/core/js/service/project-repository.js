@@ -18,27 +18,27 @@ export class ProjectRepository {
   }
 
   star(project) {
-    return this.$http.post(API_URL + '/' + project.id + '/star')
+    return this.$http.post(API_URL + '/' + project.slug + '/star')
       .then(response => response.data.data);
   }
 
   unstar(project) {
-    return this.$http.delete(API_URL + '/' + project.id + '/star')
+    return this.$http.delete(API_URL + '/' + project.slug + '/star')
       .then(response => response.data.data);
   }
 
   addMaker(project) {
-    return this.$http.post(API_URL + '/' + project.id + '/maker')
+    return this.$http.post(API_URL + '/' + project.slug + '/maker')
       .then(response => response.data.data);
   }
 
   getMakers(project) {
-    return this.$http.get(API_URL + '/' + project.id + '/makers')
+    return this.$http.get(API_URL + '/' + project.slug + '/makers')
       .then(response => response.data.data);
   }
 
   getLikers(project) {
-    return this.$http.get(API_URL + '/' + project.id + '/stars')
+    return this.$http.get(API_URL + '/' + project.slug + '/stars')
       .then(response => response.data.data);
   }
 }

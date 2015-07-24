@@ -1,4 +1,4 @@
-module.exports = function(_, Q, db, starRepository, userRepository) {
+module.exports = function(_, Q, db, starRepository, userRepository, slugGenerator) {
 
   function loadAuthor(project, users) {
     var user = _.find(users, { username: project.author });
@@ -46,6 +46,7 @@ module.exports = function(_, Q, db, starRepository, userRepository) {
   function serializeOne(project) {
     return {
       id: project.id,
+      slug: project.slug,
       name: project.name,
       shortDescription: project.shortDescription,
       description: project.description,
@@ -85,8 +86,8 @@ module.exports = function(_, Q, db, starRepository, userRepository) {
         offset: (page - 1) * projectsByPage });
     },
 
-    find: function(id) {
-      return db.Project.findById(id, { include : [db.Maker] });
+    find: function(slug) {
+      return db.Project.findOne({ where: { slug: slug }, include : [db.Maker] });
     },
 
     create: function(projectData, author) {
@@ -98,7 +99,11 @@ module.exports = function(_, Q, db, starRepository, userRepository) {
         author: author,
         approved: false
       };
-      var projectCreated = db.Project.create(project);
+      var projectCreated = slugGenerator.generate(this, project.name).then(function(slug) {
+        project.slug = slug;
+
+        return db.Project.create(project);
+      });
 
       if (projectData.isMaker) {
         projectCreated = projectCreated.then(function(project) {
@@ -118,6 +123,18 @@ module.exports = function(_, Q, db, starRepository, userRepository) {
         username: username,
         approved: false
       }));
+    },
+
+    checkSlug: function(slug) {
+      return db.Project.findAll({
+        where: { slug: slug }
+      }).then(function(projects) {
+        if (projects.length !== 0) {
+          return false;
+        } else {
+          return true;
+        }
+      });
     },
 
     serialize: function(projects) {
