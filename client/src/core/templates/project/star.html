@@ -6,7 +6,7 @@
     <i class="fa fa-heart icon"></i>
     <span>{{ ctrl.project.countStars }}</span>
 </a>
-<a ng-if="!ctrl.loggedin" class="project-stars" href="" ng-click="$event.stopPropagation();">
+<a ng-if="!ctrl.loggedin" class="project-stars" ui-sref="app.login" ng-click="$event.stopPropagation();">
     <i class="fa fa-heart icon"></i>
     <span>{{ ctrl.project.countStars }}</span>
 </a>

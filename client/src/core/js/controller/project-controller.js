@@ -11,14 +11,18 @@ export class ProjectController {
     this.makers = [];
     this.likers = [];
     this.isMaker = false;
+    this.loggedin = DyalnaIdentity.isLoggedIn();
+
     $scope.$on('DyalnaIdentity.login', () => {
       this.loadStars();
       this.loadIsMaker();
+      this.loggedin = true;
     });
 
     $scope.$on('DyalnaIdentity.logout', () => {
       this.myStars = [];
       this.loadIsMaker();
+      this.loggedin = false;
     });
 
     this.loadStars();
