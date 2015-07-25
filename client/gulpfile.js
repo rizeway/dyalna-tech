@@ -9,6 +9,10 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var del = require('del');
+var uglify  = require('gulp-uglify');
+var ngAnnotate = require('gulp-ng-annotate');
+var buffer = require('vinyl-buffer');
+var minifyCss = require('gulp-minify-css');
 
 var config = require('./config/config');
 
@@ -21,29 +25,29 @@ var PATH = {
   TEMPLATES: './src/*/**/*.html',
   VENDORS: [
     './node_modules/babel-core/browser-polyfill.min.js',
-    './bower_components/jquery/dist/jquery.js',
-    './bower_components/angular/angular.js',
-    './bower_components/angular-ui-router/release/angular-ui-router.js',
-    './bower_components/angular-strap/dist/angular-strap.js',
-    './bower_components/angular-strap/dist/angular-strap.tpl.js',
-    './bower_components/angular-animate/angular-animate.js',
-    './bower_components/angular-cookies/angular-cookies.js',
+    './bower_components/jquery/dist/jquery.min.js',
+    './bower_components/angular/angular.min.js',
+    './bower_components/angular-ui-router/release/angular-ui-router.min.js',
+    './bower_components/angular-strap/dist/angular-strap.min.js',
+    './bower_components/angular-strap/dist/angular-strap.tpl.min.js',
+    './bower_components/angular-animate/angular-animate.min.js',
+    './bower_components/angular-cookies/angular-cookies.min.js',
     './bower_components/bootstrap-markdown/js/bootstrap-markdown.js',
     './bower_components/bootstrap-markdown/locale/bootstrap-markdown.fr.js',
     './bower_components/marked/lib/marked.js',
-    './bower_components/angular-marked/angular-marked.js',
-    './bower_components/angular-gravatar/build/angular-gravatar.js',
-    './bower_components/angular-easyfb/angular-easyfb.js',
-    './bower_components/angular-growl/build/angular-growl.js',
-    './bower_components/angular-loading-bar/build/loading-bar.js',
+    './bower_components/angular-marked/angular-marked.min.js',
+    './bower_components/angular-gravatar/build/angular-gravatar.min.js',
+    './bower_components/angular-easyfb/angular-easyfb.min.js',
+    './bower_components/angular-growl/build/angular-growl.min.js',
+    './bower_components/angular-loading-bar/build/loading-bar.min.js',
     './bower_components/angulartics/dist/angulartics.min.js',
     './bower_components/angulartics/dist/angulartics-ga.min.js'
   ],
   VENDORS_CSS: [
-    './bower_components/angular-motion/dist/angular-motion.css',
-    './bower_components/bootstrap-markdown/css/bootstrap-markdown.css',
+    './bower_components/angular-motion/dist/angular-motion.min.css',
+    './bower_components/bootstrap-markdown/css/bootstrap-markdown.min.css',
     './bower_components/angular-growl/build/angular-growl.min.css',
-    './bower_components/angular-loading-bar/build/loading-bar.css'
+    './bower_components/angular-loading-bar/build/loading-bar.min.css'
   ],
   FONTS: [
     './bower_components/fontawesome/fonts/*'
@@ -86,24 +90,30 @@ gulp.task('build/app', function() {
     .bundle()
     .on('error', function(err) { console.log('Error: ' + err.message); })
     .pipe(source(PATH.APP))
+    .pipe(buffer())
+    .pipe(ngAnnotate())
+    .pipe(uglify())
     .pipe(gulp.dest(PATH.OUTPUTJS));
 });
 
 gulp.task('build/vendor', function() {
   gulp.src(PATH.VENDORS)
     .pipe(concat(PATH.VENDOR))
+    .pipe(uglify())
     .pipe(gulp.dest(PATH.OUTPUTJS));
 });
 
 gulp.task('build/vendor/css', function() {
   gulp.src(PATH.VENDORS_CSS)
     .pipe(concat(PATH.VENDOR_CSS))
+    .pipe(minifyCss())
     .pipe(gulp.dest(PATH.OUTPUTCSS));
 });
 
 gulp.task('build/less', function () {
   gulp.src(PATH.LESS)
     .pipe(less())
+    .pipe(minifyCss())
     .pipe(gulp.dest(PATH.OUTPUTCSS));
 });
 

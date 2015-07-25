@@ -1,6 +1,5 @@
 class ProjectNewController {
-
-  /* @ngIneject */
+  /* @ngInject */
   constructor(ProjectRepository, growl) {
     this.growl = growl;
     this.ProjectRepository = ProjectRepository;
@@ -25,7 +24,6 @@ class ProjectNewController {
       this.error = true;
     });
   }
-
 }
 
 export function ProjectNewDirective() {

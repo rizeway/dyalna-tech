@@ -39,8 +39,7 @@ class ProjectStarController {
   }
 }
 
-/* @ngInject */
-export function ProjectStarDirective() {
+export /* @ngInject */ function ProjectStarDirective() {
   return {
     restrict: 'E',
     scope: {

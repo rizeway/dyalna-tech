@@ -1,6 +1,7 @@
 const API_URL = '/tech/project';
 
 export class ProjectRepository {
+  /* @ngInject */
   constructor($http) {
     this.$http = $http;
   }

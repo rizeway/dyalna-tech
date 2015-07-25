@@ -1,6 +1,7 @@
 const API_URL = '/tech/star';
 
 export class StarRepository {
+  /* @ngInject */
   constructor($http) {
     this.$http = $http;
   }
