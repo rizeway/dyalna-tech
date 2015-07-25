@@ -1,7 +1,7 @@
 import {ProjectController} from '../controller/project-controller';
 
 export /* @ngInject */ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
-  $locationProvider.hashPrefix('!');
+  $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/');
   $stateProvider
     .state('app', {
