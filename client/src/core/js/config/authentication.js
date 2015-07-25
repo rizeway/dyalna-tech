@@ -8,6 +8,8 @@ export /* @ngInject */ function AuthenticationConfig(DyalnaIdentityConfigProvide
     unauthorizedState: 'app.unauthorized',
     targetState: 'app.list',
     loginState: 'app.login',
-    tokenName: 'x-dyalna-identity-token'
+    tokenName: 'x-dyalna-identity-token',
+
+    domain: 'tech'
   });
 }

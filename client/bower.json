@@ -15,7 +15,7 @@
     "angular-ui-router": "~0.2.13",
     "angular-strap": "~2.2.1",
     "angular-motion": "~0.3.4",
-    "angular-dyalna-identity": "~1.1.1",
+    "angular-dyalna-identity": "~1.2.0",
     "bootstrap-markdown": "~2.8.0",
     "angular-marked": "~0.0.15",
     "angular-gravatar": "~0.3.1",

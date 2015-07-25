@@ -9,6 +9,7 @@ import {GrowlConfig} from './config/growl';
 import {ListController} from './controller/list-controller';
 import {ProjectController} from './controller/project-controller';
 import {UserConfirmController} from './controller/user-confirm-controller';
+import {UserRegeneratePasswordController} from './controller/user-regenerate-password-controller';
 
 import {UserMenuDirective} from './directive/user-menu';
 import {MarkdownEditorDirective} from './directive/markdown-editor';
@@ -41,6 +42,7 @@ angular
   .controller('ListController', ListController)
   .controller('ProjectController', ProjectController)
   .controller('UserConfirmController', UserConfirmController)
+  .controller('UserRegeneratePasswordController', UserRegeneratePasswordController)
   .directive('userMenu', UserMenuDirective)
   .directive('markdownEditor', MarkdownEditorDirective)
   .directive('projectStar', ProjectStarDirective)

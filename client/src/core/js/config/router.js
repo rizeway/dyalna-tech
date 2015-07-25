@@ -41,5 +41,22 @@ export /* @ngInject */ function Router($locationProvider, $stateProvider, $urlRo
       controller: 'UserConfirmController as ctrl',
       security: false
     })
+    .state('app.change-password', {
+      url: '/user/changePassword',
+      templateUrl: 'core/pages/change-password.html',
+      security: true
+    })
+    .state('app.regenerate-password', {
+      url: '/regeneratePassword?token',
+      templateUrl: 'core/pages/regenerate-password.html',
+      controller: 'UserRegeneratePasswordController',
+      controllerAs: 'ctrl',
+      security: false
+    })
+    .state('app.lost-password', {
+      url: '/lostPassword',
+      templateUrl: 'core/pages/lost-password.html',
+      security: false
+    })
   ;
 }
