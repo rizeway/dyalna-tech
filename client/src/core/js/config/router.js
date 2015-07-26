@@ -1,4 +1,5 @@
 import {ProjectController} from '../controller/project-controller';
+import {UserController}    from '../controller/user-controller';
 
 export /* @ngInject */ function Router($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
@@ -18,6 +19,13 @@ export /* @ngInject */ function Router($locationProvider, $stateProvider, $urlRo
       controller: 'ProjectController as ctrl',
       templateUrl: 'core/pages/project.html',
       resolve: ProjectController.resolve,
+      security: false
+    })
+    .state('app.user', {
+      url: '/user/:username',
+      controller: 'UserController as ctrl',
+      templateUrl: 'core/pages/user.html',
+      resolve: UserController.resolve,
       security: false
     })
     .state('app.register', {

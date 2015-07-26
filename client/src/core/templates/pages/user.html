@@ -1,0 +1,40 @@
+<div>
+    <div class="content">
+
+        <div class="contenu">
+            <h1 class="user">
+                {{ ctrl.user.username }} est le co-fondateur de
+                <strong>{{ ctrl.user.founded.length }}</strong> produits
+                et aime <strong>{{ ctrl.user.likes.length }}</strong> produits.
+            </h1>
+
+            <div class="user-founded separator-top" ng-if="ctrl.user.founded.length !== 0">
+                <h2>Produits co-fondés par {{ ctrl.user.username }}</h2>
+                <div class="page">
+                    <project-resume ng-repeat="project in ctrl.user.founded" project="project" user-stars="ctrl.myStars"></project-resume>
+                </div>
+            </div>
+
+            <div class="user-likes separator-top" ng-if="ctrl.user.likes.length !== 0">
+                <h2>{{ ctrl.user.username }} aime ces produits</h2>
+                <div class="page">
+                    <project-resume ng-repeat="project in ctrl.user.likes" project="project" user-stars="ctrl.myStars"></project-resume>
+                </div>
+            </div>
+        </div>
+
+        <div class="share-buttons" ng-init="title = ctrl.user.username + ' a fondé ' + ctrl.user.founded.length + ' produits et aime ' + ctrl.user.likes.length + ' autres' ">
+            <ul ng-social-buttons
+                data-url="ctrl.absoluteUrl"
+                data-title="ctrl.user.username"
+                data-description="title">
+                <li>Partager:</li>
+                <li class="ng-social-facebook"><i class="fa fa-facebook"></i></li>
+                <li class="ng-social-google-plus"><i class="fa fa-google-plus"></i></li>
+                <li class="ng-social-twitter" data-title="title"><i class="fa fa-twitter"></i></li>
+                <li class="ng-social-linkedin"><i class="fa fa-linkedin"></i></li>
+                <li class="ng-social-pinterest"><i class="fa fa-pinterest"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>

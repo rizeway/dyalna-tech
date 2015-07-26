@@ -90,6 +90,29 @@ module.exports = function(_, Q, db, starRepository, userRepository, slugGenerato
       return db.Project.findOne({ where: { slug: slug }, include : [db.Maker] });
     },
 
+    findForMaker: function(username) {
+      return db.Project.findAll({
+        where: { approved: true },
+        include: [{
+          model: db.Maker,
+          where: { username: username, approved: true }
+        }]
+      });
+    },
+
+    findForLiker: function(username) {
+      return db.Project.findAll({
+        where: { approved: true },
+        include: [
+          db.Maker,
+          {
+            model: db.Star,
+            where: { author: username }
+          }
+        ]
+      });
+    },
+
     create: function(projectData, author) {
       var project = {
         name: projectData.name,

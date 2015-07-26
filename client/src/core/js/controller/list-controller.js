@@ -2,10 +2,9 @@ const MAX_PROJECTS_BY_PAGE = 25;
 
 export class ListController {
   /* @ngInject */
-  constructor($scope, $state, DyalnaIdentity, StarRepository, ProjectRepository) {
+  constructor($scope, DyalnaIdentity, StarRepository, ProjectRepository) {
     this.loggedin = DyalnaIdentity.isLoggedIn();
     this.user = DyalnaIdentity.user;
-    this.$state = $state;
     this.StarRepository = StarRepository;
     this.ProjectRepository = ProjectRepository;
     this.myStars = [];
@@ -53,13 +52,4 @@ export class ListController {
       }
     });
   }
-
-  getUrl(project) {
-    return this.$state.href('app.project', { slug: project.slug }, {absolute: true});
-  }
-
-  goToProject(project) {
-    this.$state.transitionTo('app.project', { slug: project.slug });
-  }
-
 }

@@ -1,0 +1,14 @@
+<div class="project resume" ng-click="ctrl.goToProject()">
+    <project-star project="ctrl.project" user-stars="ctrl.userStars"></project-star>
+    <div class="project-date">
+        <div class="date">{{ ctrl.project.createdAt|date }}</div>
+        <div class="date">{{ ctrl.project.createdAt|date:'shortTime' }}</div>
+    </div>
+
+    <a class="project-author" ui-sref="app.user({ username: ctrl.project.author.username })" ng-click="$event.stopPropagation();">
+        <img gravatar-src="ctrl.project.author.hash" gravatar-size="40">
+    </a>
+
+    <h2><a href="" class="project-name">{{ ctrl.project.name }}</a></h2>
+    <div class="project-description">{{ ctrl.project.shortDescription }}</div>
+</div>

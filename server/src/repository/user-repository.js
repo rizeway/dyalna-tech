@@ -25,6 +25,14 @@ module.exports = function(crypto, identityAdminClient) {
           return serializeUser(user);
         });
       });
+    },
+
+    find: function(username) {
+      var url = 'user?usernames[]=' + username;
+
+      return identityAdminClient.get(url).then(function(users) {
+        return serializeUser(users[0]);
+      });
     }
   };
 };

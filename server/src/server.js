@@ -25,5 +25,8 @@ app.post('/project', container.middlewares.authentication, container.controllers
 // Stars
 app.get('/star', container.middlewares.authentication, container.controllers.starController.myStarsAction);
 
+// Users
+app.get('/user/:username', container.controllers.userController.findOneAction);
+
 app.listen(container.config.port);
 console.log('Dyalna Tech Server running on Port %s', container.config.port);

@@ -7,7 +7,10 @@
                     <div class="date">{{ ctrl.project.createdAt|date }}</div>
                     <div class="date">{{ ctrl.project.createdAt|date:'shortTime' }}</div>
                 </div>
-                <img class="project-author" gravatar-src="ctrl.project.author.hash" gravatar-size="40">
+
+                <a class="project-author" ui-sref="app.user({ username: ctrl.project.author.username })" ng-click="$event.stopPropagation();">
+                    <img gravatar-src="ctrl.project.author.hash" gravatar-size="40">
+                </a>
 
                 <h1>
                     <a ng-href="{{ ctrl.project.url }}" class="project-name" target="_blank">
@@ -23,7 +26,7 @@
         </div>
 
         <div class="sidebar">
-            <div class="project-share">
+            <div class="share-buttons">
                 <ul ng-social-buttons
                     data-url="ctrl.absoluteUrl"
                     data-title="ctrl.project.name"
@@ -43,14 +46,14 @@
                     <a class="pull-right" ng-if="!ctrl.isMaker && ctrl.loggedin" href="" ng-click="ctrl.claimToBeMaker()" title="Je suis aussi un fondateur"><i class="fa fa-plus-circle"></i></a>
                 </h3>
                 <div ng-if="ctrl.makers.length === 0">Aucun fondateur approuvé.</div>
-                <a href="" class="maker" ng-repeat="maker in ctrl.makers">
+                <a ui-sref="app.user({ username: maker.username })" class="maker" ng-repeat="maker in ctrl.makers">
                     <img title="{{ maker.username }}" class="project-author" gravatar-src="maker.hash" gravatar-size="40">
                 </a>
             </div>
 
             <div class="project-likers sidebar-block separator-top" ng-if="!ctrl.loadingLikers && ctrl.likers.length !== 0">
                 <h3>Ils aiment {{ ctrl.project.name }}</h3>
-                <a href="" class="maker" ng-repeat="liker in ctrl.likers">
+                <a ui-sref="app.user({ username: liker.username })" class="maker" ng-repeat="liker in ctrl.likers">
                     <img title="{{ liker.username }}" gravatar-src="liker.hash" gravatar-size="40">
                 </a>
             </div>

@@ -12,17 +12,7 @@
 
         <div class="contenu">
             <div class="page" ng-repeat="projects in ctrl.pages">
-                <div ng-repeat="project in projects" class="project resume" ng-click="ctrl.goToProject(project)">
-                    <project-star project="project" user-stars="ctrl.myStars"></project-star>
-                    <div class="project-date">
-                        <div class="date">{{ project.createdAt|date }}</div>
-                        <div class="date">{{ project.createdAt|date:'shortTime' }}</div>
-                    </div>
-                    <img class="project-author" gravatar-src="project.author.hash" gravatar-size="40">
-
-                    <h2><a href="" class="project-name">{{ project.name }}</a></h2>
-                    <div class="project-description">{{ project.shortDescription }}</div>
-                </div>
+                <project-resume ng-repeat="project in projects" project="project" user-stars="ctrl.myStars"></project-resume>
             </div>
 
             <a ng-show="!ctrl.loading && ctrl.hasNextPage" class="rizeway-pager pointer" ng-click="ctrl.loadNextPage()">
