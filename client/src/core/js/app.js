@@ -50,3 +50,4 @@ angular
   .service('ProjectRepository', ProjectRepository)
   .service('StarRepository', StarRepository)
 ;
+

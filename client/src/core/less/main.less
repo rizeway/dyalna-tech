@@ -1,5 +1,6 @@
 @import '../../../bower_components/dyalna-ui/less/bootstrap';
 @import '../../../bower_components/fontawesome/less/font-awesome';
+@import 'layout';
 @import 'buttons';
 @import 'sliding';
 @import 'close';
@@ -8,6 +9,7 @@
 @import 'projects';
 @import 'growl';
 @import 'sidebar';
+@import 'smartphone';
 
 #user-loggedin-menu {
   width: 200px;
@@ -25,4 +27,13 @@
 
 #login .modal-body {
   padding: 0;
+}
+
+#fbcomments, .fb_iframe_widget,
+.fb_iframe_widget[style],
+.fb_iframe_widget iframe[style],
+.fb_iframe_widget span,
+#fbcomments iframe [style]
+{
+  width: 100% !important;
 }
