@@ -23,7 +23,21 @@
         </div>
 
         <div class="sidebar">
-            <div class="project-makers sidebar-block" ng-if="!ctrl.loadingMakers">
+            <div class="project-share">
+                <ul ng-social-buttons
+                    data-url="ctrl.absoluteUrl"
+                    data-title="ctrl.project.name"
+                    data-description="ctrl.project.shortDescription">
+                    <li>Partager:</li>
+                    <li class="ng-social-facebook"><i class="fa fa-facebook"></i></li>
+                    <li class="ng-social-google-plus"><i class="fa fa-google-plus"></i></li>
+                    <li class="ng-social-twitter"><i class="fa fa-twitter"></i></li>
+                    <li class="ng-social-linkedin"><i class="fa fa-linkedin"></i></li>
+                    <li class="ng-social-pinterest"><i class="fa fa-pinterest"></i></li>
+                </ul>
+            </div>
+
+            <div class="project-makers sidebar-block separator-top" ng-if="!ctrl.loadingMakers">
                 <h3>
                     Fondateurs
                     <a class="pull-right" ng-if="!ctrl.isMaker && ctrl.loggedin" href="" ng-click="ctrl.claimToBeMaker()" title="Je suis aussi un fondateur"><i class="fa fa-plus-circle"></i></a>

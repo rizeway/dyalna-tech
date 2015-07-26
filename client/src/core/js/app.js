@@ -32,6 +32,7 @@ angular
     'angular-growl',
     'angular-loading-bar',
     'angulartics', 'angulartics.google.analytics',
+    'ngSocial',
     DyalnaIdentityModule
   ])
   .config(Router)
