@@ -1,0 +1,23 @@
+.md-editor>textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  color: #2c3e50;
+  background-color: #fafafa;
+  background-image: none;
+  border: 1px solid #dce4ec;
+  border: none;
+
+  &:focus {
+    background-color: #fafafa;
+    border: none;
+  }
+}
+
+.md-editor.active {
+  border: 1px solid #008a9a;
+  .box-shadow(none);
+}

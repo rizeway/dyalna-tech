@@ -30,6 +30,10 @@ module.exports = function(projectRepository, userRepository, mailer, feedGenerat
       return projectRepository.find(req.params.slug)
         .then(projectRepository.serializeOne.bind(projectRepository))
         .then(function(project) {
+          if (!project.approved) {
+            return res.status(500).send({ status: 'error', message: 'error fetching project' });
+          }
+
           return res.send({ status: 'success', data: project});
         }).catch(function() {
           return res.status(500).send({ status: 'error', message: 'error fetching project' });

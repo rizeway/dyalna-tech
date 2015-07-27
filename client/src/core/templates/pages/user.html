@@ -2,14 +2,15 @@
     <div class="content">
 
         <div class="contenu">
-            <h1 class="user">
+            <h1 class="user-title">
+                <img gravatar-src="ctrl.user.hash" gravatar-size="40">
                 {{ ctrl.user.username }} est le co-fondateur de
                 <strong>{{ ctrl.user.founded.length }}</strong> produits
-                et aime <strong>{{ ctrl.user.likes.length }}</strong> produits.
+                et aime <strong>{{ ctrl.user.likes.length }}</strong> autres produits.
             </h1>
 
             <div class="user-founded separator-top" ng-if="ctrl.user.founded.length !== 0">
-                <h2>Produits co-fondés par {{ ctrl.user.username }}</h2>
+                <h2>{{ ctrl.user.username }} a co-fondé</h2>
                 <div class="page">
                     <project-resume ng-repeat="project in ctrl.user.founded" project="project" user-stars="ctrl.myStars"></project-resume>
                 </div>
