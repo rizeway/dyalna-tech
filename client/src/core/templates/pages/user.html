@@ -24,18 +24,20 @@
             </div>
         </div>
 
-        <div class="share-buttons" ng-init="title = ctrl.user.username + ' a fondé ' + ctrl.user.founded.length + ' produits et aime ' + ctrl.user.likes.length + ' autres' ">
-            <ul ng-social-buttons
-                data-url="ctrl.absoluteUrl"
-                data-title="ctrl.user.username"
-                data-description="title">
-                <li>Partager:</li>
-                <li class="ng-social-facebook"><i class="fa fa-facebook"></i></li>
-                <li class="ng-social-google-plus"><i class="fa fa-google-plus"></i></li>
-                <li class="ng-social-twitter" data-title="title"><i class="fa fa-twitter"></i></li>
-                <li class="ng-social-linkedin"><i class="fa fa-linkedin"></i></li>
-                <li class="ng-social-pinterest"><i class="fa fa-pinterest"></i></li>
-            </ul>
+        <div class="sidebar">
+            <div class="share-buttons" ng-init="title = ctrl.user.username + ' a fondé ' + ctrl.user.founded.length + ' produits et aime ' + ctrl.user.likes.length + ' autres' ">
+                <ul ng-social-buttons
+                    data-url="ctrl.absoluteUrl"
+                    data-title="ctrl.user.username"
+                    data-description="title">
+                    <li>Partager:</li>
+                    <li class="ng-social-facebook"><i class="fa fa-facebook"></i></li>
+                    <li class="ng-social-google-plus"><i class="fa fa-google-plus"></i></li>
+                    <li class="ng-social-twitter" data-title="title"><i class="fa fa-twitter"></i></li>
+                    <li class="ng-social-linkedin"><i class="fa fa-linkedin"></i></li>
+                    <li class="ng-social-pinterest"><i class="fa fa-pinterest"></i></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
