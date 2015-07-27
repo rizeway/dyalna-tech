@@ -5,6 +5,7 @@ import {AuthenticationConfig} from './config/authentication';
 import {GravatarConfig} from './config/gravatar';
 import {FacebookConfig} from './config/facebook';
 import {GrowlConfig} from './config/growl';
+import {CookiesConfig} from './config/cookies';
 
 import {ListController} from './controller/list-controller';
 import {ProjectController} from './controller/project-controller';
@@ -43,6 +44,7 @@ angular
   .config(GravatarConfig)
   .config(FacebookConfig)
   .config(GrowlConfig)
+  .config(CookiesConfig)
   .controller('ListController', ListController)
   .controller('ProjectController', ProjectController)
   .controller('UserController', UserController)
