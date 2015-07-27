@@ -42,7 +42,8 @@ var PATH = {
     './bower_components/angular-loading-bar/build/loading-bar.min.js',
     './bower_components/angulartics/dist/angulartics.min.js',
     './bower_components/angulartics/dist/angulartics-ga.min.js',
-    './bower_components/angular-social/angular-social.js'
+    './bower_components/angular-social/angular-social.js',
+    './bower_components/cookieconsent2/cookieconsent.js'
   ],
   VENDORS_CSS: [
     './bower_components/angular-motion/dist/angular-motion.min.css',

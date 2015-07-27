@@ -58,3 +58,9 @@ angular
   .service('UserRepository', UserRepository)
 ;
 
+// Cookie Consent
+window.cookieconsent_options = {
+  dismiss: 'Ok',
+  theme: 'light-bottom',
+  message: 'Ce site web utilise les cookies pour assurer la meilleure expérience utilisateur.'
+};
